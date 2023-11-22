@@ -1,0 +1,409 @@
+<div class='top-bar fixed'>
+  <button class="fa float-left hamburger-dashboard"
+          [ngClass]="isWidgetSidebar? 'fa-arrow-left' : 'fa-bars'"
+          (click)="isWidgetSidebar =!isWidgetSidebar"></button>
+  <span class="dashboard-title d-none d-sm-block">Display Name | {{PageName}} </span>
+  <div class="page-title d-flex justify-content-md-between justify-content-end d-sm-none">
+    <div class="xs-title">
+      Display Name, {{PageName}}
+    </div>
+  </div>
+  <div class="float-right pr-2 d-md-block d-none">
+    <button class="btn-footer-fill mt-2 mr-2" id="btnPreview" title="Preview" [disabled]="isMasterSaveBtnDisabled" (click)="pageDesignPreview()"> Preview</button>
+    <button class="btn-footer-fill mt-2 mr-2" id="btnPrev" title="Previous" [disabled]="isMasterSaveBtnDisabled" (click)="prevBtnClicked()"> Prev</button>
+    <button class="btn-footer-fill mt-2 mr-2" id="btnSave" title="Save" [disabled]="isMasterSaveBtnDisabled" (click)="OnSaveBtnClicked()"> Save</button>
+    <button class="btn-footer-outline mt-2" id="btnCancel" title="Cancel" (click)="backClicked()"> Cancel ll</button>
+  </div>
+  <div class="float-right pr-2 d-md-none">
+    <!-- <span class="fa fa- xs-position1 d-md-none" (click)="OnSaveBtnClicked()"></span> -->
+    <span class="fa fa-check xs-position1 d-md-none" (click)="OnSaveBtnClicked()"></span>
+    <span class="fa fa-close xs-position2 d-md-none" (click)="backClicked()" id="spnMachineBack"></span>
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <div class="widget-sidebar stylescrollbar" [ngClass]="isWidgetSidebar? 'show-sidebar show-sidebar-widget':'hide-sidebar'">
+    <ul class="side-bar-ul">
+      <li class="side-bar-li" title={{widget.DisplayName}} *ngFor="let widget of widgetsArray">
+        <a (click)="selectWidget(widget.Identifier, widget.WidgetName)">
+          <span class="nav-icon fa" [ngClass]="{
+                  'fa-address-book-o': widget.WidgetName == 'CustomerInformation' || widget.WidgetName == 'CustomerDetails' || widget.WidgetName == 'PortfolioCustomerDetails',
+                  'fa-address-card-o' : widget.WidgetName == 'AccountInformation' || widget.WidgetName == 'CustomerAddressDetails',
+                  'fa-cc fa-lg': widget.WidgetName == 'ClientContactDetails',
+                  'fa-trophy fa-lg': widget.WidgetName == 'GreenbacksTotalRewardPoints',
+                  'icon-imageWidget' : widget.WidgetName == 'Image',
+                  'icon-videoWidget' : widget.WidgetName == 'Video',
+                  'icon-widget-single-column2 fa-lg' : widget.WidgetName == 'Summary' || widget.WidgetName == 'BreakdownOfInvestmentAccounts' || widget.WidgetName == 'WealthBreakdownOfInvestmentAccounts' || widget.WidgetName == 'PersonalLoanDetail' || widget.WidgetName == 'PersonalLoanTotalAmountDetail' || widget.WidgetName == 'HomeLoanTotalAmountDetail' || widget.WidgetName == 'AccountSummary' || widget.WidgetName == 'WealthHomeLoanTotalAmountDetail' || widget.WidgetName == 'MCAAccountSummary'|| widget.WidgetName == 'WealthMCAAccountSummary' ||  widget.WidgetName == 'CorporateSaverTableTotal' ,
+                  'fa-bell-o' : widget.WidgetName == 'ReminderaAndRecommendation' || widget.WidgetName == 'SpecialMessage' || widget.WidgetName == 'PortfolioReminders',
+                  'icon-rp-loss1 fa-lg' : widget.WidgetName == 'InvestmentPortfolioRisk',
+                  'icon-AnalyticsWidget' : widget.WidgetName == 'Analytics',
+                  'icon-AvailableBalanceWidget' : widget.WidgetName == 'SavingAvailableBalance' || widget.WidgetName == 'CurrentAvailableBalance' || widget.WidgetName == 'PersonalLoanPaymentDue',
+                  'icon-widget-multi-column2' : widget.WidgetName == 'SavingTransaction' || widget.WidgetName == 'InvestmentPortfolioStatement' || widget.WidgetName == 'InvestmentWealthPortfolioStatement' || widget.WidgetName == 'PersonalLoanTransaction' || widget.WidgetName == 'PersonalLoanAccountsBreakdown' || widget.WidgetName == 'HomeLoanAccountsBreakdown' || widget.WidgetName == 'WealthHomeLoanAccountsBreakdown' || widget.WidgetName == 'MCATransaction' || widget.WidgetName == 'WealthMCATransaction'||widget.WidgetName == 'CorporateSaverTransaction',
+                  'icon-widget-line-chart2' : widget.WidgetName == 'SavingTrend' || widget.WidgetName == 'InvestorPerformance' || widget.WidgetName == 'WealthInvestorPerformance',
+                  'icon-TransactionMixWidget' : widget.WidgetName == 'TransactionMix',
+                  'icon-rp-production1' : widget.WidgetName == 'SpendingTrend',
+                  'fa-newspaper-o' : widget.WidgetName == 'NewsAlerts' || widget.WidgetName == 'NedbankService' || widget.WidgetName == 'WealthNedbankService' || widget.WidgetName == 'PortfolioNewsAlerts',
+                  'fa-credit-card' : widget.WidgetName == 'CurrentTransaction',
+                  'icon-rp-quality1' : widget.WidgetName == 'Top4IncomeSources',
+                  'fa-university' : widget.WidgetName == 'BranchDetails' || widget.WidgetName == 'WealthHomeLoanBranchDetails' || widget.WidgetName == 'WealthMCABranchDetails',
+                  'fa-list' : widget.WidgetName == 'ExplanatoryNotes' || widget.WidgetName == 'WealthExplanatoryNotes',
+                  'fa-exclamation-circle' : widget.WidgetName == 'PL_InsuranceMessage'  || widget.WidgetName == 'HomeLoanPaymentDueSpecialMsg'||widget.WidgetName == 'CorporateSaverAgentMessage',
+                  'fa-table fa-lg': widget.WidgetType == 'Table' || widget.WidgetName == 'HomeLoanInstalmentDetail',
+                  'fa-list-alt fa-lg': widget.WidgetType == 'Form' || widget.WidgetName == 'GreenbacksContactUs',
+                  'fa-code fa-lg': widget.WidgetType == 'Html',
+                  'fa-bar-chart fa-lg': widget.WidgetType == 'BarGraph' || widget.WidgetName == 'AccountAnalysis' || widget.WidgetName == 'YTDRewardsPoints' || widget.WidgetName == 'PointsRedeemedYTD' || widget.WidgetName == 'ProductRelatedPointsEarned',
+                  'fa-line-chart fa-lg': widget.WidgetType == 'LineGraph',
+                  'fa-pie-chart fa-lg': widget.WidgetType == 'PieChart' || widget.WidgetName == 'CategorySpendRewards',
+                  'fa-code fa-code': widget.WidgetName == 'StaticHtml',
+                  'fa fa-scissors': widget.WidgetName == 'PageBreak',
+                  'fa-ravelry fa-ravelry':  widget.WidgetName == 'CSAgentLogo',
+                  
+                  'fa-address-card fa-address-card':  widget.WidgetName == 'CorporateSaverAgentAddress',
+                  
+                
+                  'fa-vcard-o fa-vcard-o':  widget.WidgetName == 'CorporateSaverClientandAgentDetails',
+                  
+                  'fa-id-card-o': widget.WidgetName == 'SegmentBasedContent',
+                  'fa-tags': widget.WidgetName == 'HomeLoanSummaryTaxPurpose' || widget.WidgetName == 'WealthHomeLoanSummaryTaxPurpose' || widget.WidgetName == 'CorporateAgentDetails',
+                  'fa-repeat' : widget.WidgetName == 'HomeLoanInstalment' || widget.WidgetName == 'WealthHomeLoanInstalment',
+                  'fa-bar-chart' : widget.WidgetName == 'MCAVATAnalysis' || widget.WidgetName == 'WealthMCAVATAnalysis'
+              }">
+          </span><span class="nav-title text-truncate" title="{{ widget.DisplayName }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100px"> {{widget.DisplayName}} </span>
+
+        </a>
+      </li>
+    </ul>
+  </div>  
+  <div class="overlay" [ngClass]="isWidgetSidebar? 'show' : 'hide'"></div>
+  <div class="dashboard-inner-container">
+    <div class="widget-container">
+      <gridster [options]="options">
+        <gridster-item [item]="item" *ngFor="let item of widgetsGridsterItemArray">
+          <button class='fa fa-trash-o widget-action' (click)="removeItem($event,item)"></button>
+          <button class='fa fa-gear mr-3 widget-action' (click)="isImageConfigForm(item.WidgetId, item.widgetItemCount)" *ngIf="item.value=='Image'"></button>
+          <button class='fa fa-gear mr-3 widget-action' (click)="isVideoConfigForm(item.WidgetId, item.widgetItemCount)" *ngIf="item.value=='Video'"></button>
+          <button class='fa fa-gear mr-3 widget-action' (click)="isStaticHtmlConfigForm(item.WidgetId, item.widgetItemCount)" *ngIf="item.value=='StaticHtml'"></button>
+          <button class='fa fa-gear mr-3 widget-action' (click)="isSegmentBasedContentConfigForm(item.WidgetId, item.widgetItemCount)" *ngIf="item.value=='SegmentBasedContent'"></button>
+          <vidyo-widget [vdoItem]='item' *ngIf="item.value=='Video'"></vidyo-widget>
+          <image-widget [imgItem]='item' *ngIf="item.value=='Image'"></image-widget>
+          <Segment-based-content-widget [SegmentBasedContentItem]='item' *ngIf="item.value=='SegmentBasedContent'"></Segment-based-content-widget>
+          <DynamicBarChartWidget [barchartItem]='item' *ngIf="item.WidgetType=='BarGraph'"></DynamicBarChartWidget>
+          <DynamicLineChartWidget [linechartItem]='item' *ngIf="item.WidgetType=='LineGraph'"></DynamicLineChartWidget>
+          <DynamicPieChartWidget [piechartItem]='item' *ngIf="item.WidgetType=='PieChart'"></DynamicPieChartWidget>
+          <ndc-dynamic [ndcDynamicComponent]="item.component"></ndc-dynamic>
+        </gridster-item>
+      </gridster>
+    </div>
+  </div>
+
+  <!--image config-->
+  <form [formGroup]="ImageConfigForm" name="imgConfigform">
+    <div class="form-popup side-popup width340" [ngClass]="isImageConfig? 'show' : 'hide'">
+      <div class="filter-head">
+        <label class="m-0">Image Configuration</label>
+      </div>
+      <div class="filter-body stylescrollbar">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label> Personalize </label>
+            <div>
+              <label class="switch d-block">
+                <input type="checkbox" [checked]="isPersonalizeImage" (change)="isPersonalizeImage=!isPersonalizeImage">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isPersonalizeImage">
+          <div class="col-sm-12 form-group">
+            <label> Asset Library </label>
+            <span class="text-danger"> *</span>
+            <select formControlName="imgAssetLibrary" (change)="onAssetLibrarySelected($event, 'image')" class="form-control">
+              <option *ngFor="let al of assetLibraryList" [value]="al.Identifier">{{al.Name}}</option>
+            </select>
+            <div class="validation-msg" style="color:red">
+              <ul style="list-style-type:none" *ngIf="imageFormErrorObject.showAssetLibraryError">
+                <li class="text-danger">Please select asset library</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isPersonalizeImage">
+          <div class="col-sm-12 form-group">
+            <label> Assets </label>
+            <span class="text-danger"> *</span>
+            <select class="form-control" formControlName="imgAsset" (change)="onAssetSelected($event, 'image')">
+              <option *ngFor="let ast of assets" [value]="ast.Identifier">{{ast.Name}}</option>
+            </select>
+            <div class="validation-msg" style="color:red">
+              <ul style="list-style-type:none" *ngIf="imageFormErrorObject.showAssetError">
+                <li class="text-danger">Please select asset</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isPersonalizeImage">
+          <div class="col-sm-12 form-group">
+            <label> Target Link </label>
+            <!-- <span class="text-danger"> *</span> -->
+            <input type="text" class="form-control" formControlName="imageUrl" />
+            <div class="validation-msg" style="color:red" *ngIf="imgForm.imageUrl.touched && imgForm.imageUrl.errors">
+              <ul style="list-style-type:none">
+                <!-- <li class="text-danger" *ngIf="imgForm.imageUrl.errors?.required">
+                  Target link required
+                </li> -->
+                <li class="text-danger" *ngIf="imgForm.imageUrl.errors?.pattern">
+                  Invalid target link
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isPersonalizeImage">
+          <div class="col-sm-6">
+            <label> Image Height (in px) </label>
+            <input type="text" class="form-control" formControlName="imageHeight" placeholder="Please enter height in px" />
+            <div class="validation-msg" style="color:red" *ngIf="imgForm.imageHeight.touched && imgForm.imageHeight.errors">
+              <ul style="list-style-type:none">
+                <li class="text-danger" *ngIf="imgForm.imageHeight.errors?.pattern">
+                  Invalid height value
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label> Image Align </label>
+            <select formControlName="imgAlign" class="form-control">
+              <option value="0" selected>Center</option>
+              <option value="1">Left</option>
+              <option value="2">Right</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" *ngIf="!isPersonalizeImage" style="margin-top: 40px;">
+          <div class="col-sm-12 text-center" *ngIf="imgAssetId!=0">
+            <img [src]="ImagePreviewSrc" id="configImagePreview" class="width70">
+          </div>
+        </div>
+      </div>
+      <div class="filter-footer">
+        <ul class="nav nav-toolbar">
+          <li class="nav-item width50">
+            <button title="Save" id="btnSubmitImageForm" [disabled]="saveImgFormValidation()" (click)="OnImageConfigBtnClicked('submit')" class="btn-footer-fill btn-block rounded-0 height100">
+              <span class="fa fa-check"></span>
+            </button>
+          </li>
+          <li class="nav-item width50" (click)="OnImageConfigBtnClicked('cancel')">
+            <button title="Close" id="btnCloseImageForm" class="btn-footer-fill btn-block rounded-0 height100">
+              <span class="fa fa-close"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+
+  <!--video config-->
+  <form [formGroup]="VideoConfigForm" name="vdoConfigform">
+    <div class="form-popup side-popup width340" [ngClass]="isVideoConfig? 'show' : 'hide'">
+      <div class="filter-head">
+        <label class="m-0">Video Configuration</label>
+      </div>
+      <div class="filter-body stylescrollbar">
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label> Personalize </label>
+            <div>
+              <label class="switch d-block">
+                <input type="checkbox" [checked]="isPersonalize" (change)="isPersonalize=!isPersonalize">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label> Embedded </label>
+            <div>
+              <label class="switch d-block">
+                <input type="checkbox" (change)="isEmbedded=!isEmbedded" [checked]="isEmbedded" [disabled]="isPersonalize">
+                <span class="slider round" [ngClass]="isPersonalize ? 'disabled-cursor bg-secondary':''"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row" *ngIf="(isEmbedded && !isPersonalize)">
+            <div class="col-sm-12 form-group">
+              <label> URL </label> <span class="text-danger"> *</span>
+              <input type="text" class="form-control" formControlName="vdoUrl" />
+              <div class="validation-msg" style="color:red" *ngIf="vdoForm.vdoUrl.touched && vdoForm.vdoUrl.errors">
+                <ul style="list-style-type:none">
+                  <li class="text-danger" *ngIf="vdoForm.vdoUrl.errors?.required">
+                    URL is required
+                  </li>
+                  <li class="text-danger" *ngIf="vdoForm.vdoUrl.errors?.pattern">
+                    Invalid URL
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isEmbedded && !isPersonalize">
+            <div class="col-sm-12 form-group">
+              <label> Asset Library </label> <span class="text-danger"> *</span>
+              <select class="form-control" formControlName="vdoAssetLibrary" (change)="onAssetLibrarySelected($event, 'video')">
+                <option *ngFor="let al of assetLibraryList" [value]="al.Identifier">{{al.Name}}</option>
+              </select>
+              <div class="validation-msg" style="color:red">
+                <ul style="list-style-type:none" *ngIf="videoFormErrorObject.showAssetLibraryError">
+                  <li class="text-danger">Please select asset library</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isEmbedded && !isPersonalize">
+            <div class="col-sm-12 form-group">
+              <label> Assets </label> <span class="text-danger"> *</span>
+              <select class="form-control" formControlName="vdoAsset" (change)="onAssetSelected($event, 'video')">
+                <option *ngFor="let ast of assets" [value]="ast.Identifier">{{ast.Name}}</option>
+              </select>
+              <div class="validation-msg" style="color:red">
+                <ul style="list-style-type:none" *ngIf="videoFormErrorObject.showAssetError">
+                  <li class="text-danger">Please select asset</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isEmbedded && !isPersonalize">
+            <div class="col-sm-12 text-center" id="videoPreviewDiv">
+              <!-- <video controls *ngIf="vdoAssetId != 0" style="height: 200px;width: 80%;">
+                <source src='{{videoPreviewSrc}}' id="videoConfigPreviewSrc" type="video/mp4">
+              </video> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="filter-footer">
+        <ul class="nav nav-toolbar">
+          <li class="nav-item width50">
+            <button title="Save" id="btnSubmitVideoForm" class="btn-footer-fill btn-block rounded-0 height100" [disabled]="saveVideoFormValidation()"
+                    (click)="OnVideoConfigBtnClicked('submit')">
+              <span class="fa fa-check"></span>
+            </button>
+          </li>
+          <li class="nav-item width50" (click)="OnVideoConfigBtnClicked('cancel')">
+            <button title="Close" id="btnCloseVideoForm" class="btn-footer-fill btn-block rounded-0 height100">
+              <span class="fa fa-close"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+
+  <!--Static Html config-->
+  <form [formGroup]="StaticConfigForm" name="staticHtmlConfigform">
+    <div class="form-popup side-popup width70Percent" [ngClass]="isStaticHtmlConfig? 'show' : 'hide'">
+      <div class="filter-head">
+        <label class="m-0">Static Html Configuration</label>
+      </div>
+      <div class="filter-body stylescrollbar">
+        <div>
+          <div class="col-sm-12 form-group">
+
+            <!-- <ejs-richtexteditor id='customRTE' #customRTE
+            [toolbarSettings]='tools'
+            [value]='editorValue' [insertImageSettings]='insertImageSettings'
+            >
+
+            </ejs-richtexteditor> -->
+
+            <ejs-richtexteditor #staticHtmlRTE [toolbarSettings]='tools' [enableResize]='true' [value]="staticHtmlContent" formControlName="staticHtml">
+
+            </ejs-richtexteditor>
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="filter-footer">
+        <ul class="nav nav-toolbar">
+          <li class="nav-item width50">
+            <button title="Save" id="btnSubmitStaticHtmlForm" class="btn-footer-fill btn-block rounded-0 height100" [disabled]="saveStaticHtmlFormValidation()"
+                    (click)="OnStaticHtmlConfigBtnClicked('submit')">
+              <span class="fa fa-check"></span>
+            </button>
+          </li>
+          <li class="nav-item width50" (click)="OnStaticHtmlConfigBtnClicked('cancel')">
+            <button title="Close" id="btnCloseStaticHtmlForm" class="btn-footer-fill btn-block rounded-0 height100">
+              <span class="fa fa-close"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+
+  <!--Segment Based Content config-->
+  <form [formGroup]="SegmentBasedContentForm" name="segmentBasedContentConfigform">
+    <div class="form-popup side-popup width70Percent" [ngClass]="issegmentBasedContentConfig? 'show' : 'hide'">
+      <div class="filter-head">
+        <label class="m-0">Segment Based Content Configuration</label>
+      </div>
+      <div class="filter-body stylescrollbar">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label> Segment </label>
+            <span class="text-danger"> *</span>
+            <select formControlName="SegmentId" (change)="onSegmentSelected($event)" class="form-control">
+              <option *ngFor="let al of segmentList" [value]="al.Code">{{al.Name}}</option>
+            </select>
+            <div class="validation-msg" style="color:red">
+              <ul style="list-style-type:none" *ngIf="segmentBasedContentFormErrorObject.showSegmentError">
+                <li class="text-danger">Please select segment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-group">
+
+            <label> Html </label>
+            <span class="text-danger"> *</span>
+            <ejs-richtexteditor #segmentBasedContentRTE [toolbarSettings]='tools' [enableResize]='true' [value]="segmentBasedContentContent" formControlName="SegmentBasedContent">
+
+            </ejs-richtexteditor>
+            <div class="validation-msg" style="color:red">
+              <ul style="list-style-type:none" *ngIf="segmentBasedContentFormErrorObject.showContentError">
+                <li class="text-danger">Please enter html content.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="filter-footer">
+        <ul class="nav nav-toolbar">
+          <li class="nav-item width50">
+            <button title="Save" id="btnSubmitSegmentBasedContentForm" class="btn-footer-fill btn-block rounded-0 height100"
+                    (click)="OnSegmentBasedContentConfigBtnClicked('submit')">
+              <span class="fa fa-check"></span>
+            </button>
+          </li>
+          <li class="nav-item width50" (click)="OnSegmentBasedContentConfigBtnClicked('cancel')">
+            <button title="Close" id="btnCloseSegmentBasedContentForm" class="btn-footer-fill btn-block rounded-0 height100">
+              <span class="fa fa-close"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<div class="overlay a" id="divOverlayFilter" [ngClass]="!isImageConfig? 'hide':'show'"></div>
+<div class="overlay a" id="divOverlayFilter" [ngClass]="!isVideoConfig? 'hide':'show'"></div>

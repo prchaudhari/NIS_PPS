@@ -1,0 +1,153 @@
+<div class="main-container">
+  <div class="page-title">
+    <span class="xs-title" *ngIf="roleEditModeOn == false">Add Role</span>
+    <span class="xs-title" *ngIf="roleEditModeOn == true">Edit Role - {{Name}}</span>
+  </div>
+
+  <form [formGroup]="roleFormGroup" name="roleForm">
+    <div class="card border-0 mb-2 card-shadow">
+      <div class="card-header bg-white d-flex justify-content-between">
+        <div>
+          <label class="m-0">Details</label>
+        </div>
+        <div>
+          <button type="button" id="btnCollapsedDetails"
+                  class="toggle-btn border-0 p-0 bg-transparent"
+                  (click)="isCollapsedDetails = !isCollapsedDetails"
+                  [attr.aria-expanded]="!isCollapsedDetails"
+                  aria-controls="collapseDetails">
+            <span class="fa" [ngClass]="!isCollapsedDetails? 'fa-angle-down' : 'fa-angle-right'"></span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body" id="collapseDetails" [ngbCollapse]="isCollapsedDetails">
+        <div class="row form-group">
+          <div class="col-md-6 col-sm-6 col-lg-4">
+            <label id="lblRoleName" for="inputRoleName">Name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="inputRoleName" name="roleName"
+                   formControlName="roleName" />
+            <!-- Error Masseges  -->
+            <div class="validation-msg" style="color:red" *ngIf="roleName.touched && roleName.errors">
+              <ul style="list-style-type:none">
+                <li class="text-danger" *ngIf="roleName.errors?.pattern">Invalid Role Name</li>
+                <li class="text-danger" *ngIf="roleName.errors?.required">Role name required</li>
+                <li class="text-danger" *ngIf="roleName.errors?.minlength">Role name length should not be less than 2</li>
+                <li class="text-danger" *ngIf="roleName.errors?.maxlength">Role name length should not be greater than 50</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-lg-6">
+            <label id="lblDescription">Description</label>
+            <textarea class="form-control" name="roleDescription" rows="3" id="txtDescription" formControlName="roleDescription"></textarea>
+            <div class="validation-msg" style="color:red" *ngIf="roleDescription.touched && roleDescription.errors">
+              <ul style="list-style-type:none">
+                <li class="text-danger" *ngIf="roleDescription.errors?.maxlength">Role description length should not be greater than 255</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card border-0 mb-2 card-shadow">
+      <div class="card-header  bg-white d-flex justify-content-between">
+        <div>
+          <label class="m-0">Permissions</label>
+        </div>
+        <div class="validation-msg" style="color:red">
+          <ul *ngIf="roleFormErrorObject.roleShowError" style="list-style-type:none">
+            <li class="text-danger"> Role Permissions required</li>
+          </ul>
+        </div>
+        <div>
+          <button type="button" id="btnCollapsedPermissions"
+                  class="toggle-btn border-0 p-0 bg-transparent"
+                  (click)="isCollapsedPermissions = !isCollapsedPermissions"
+                  [attr.aria-expanded]="!isCollapsedPermissions" aria-controls="collapsedPermissions">
+            <span class="fa" [ngClass]="!isCollapsedPermissions? 'fa-angle-down' : 'fa-angle-right'"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body rtl-checkbox parent-rtl" id="collapsedPermissions" [ngbCollapse]="isCollapsedPermissions">
+        <!--repeat-->
+        <div class="custom-control custom-checkbox mb-4">
+          <input class="custom-control-input" type="checkbox" [(ngModel)]="allPermisions" id="allPermisions" [checked]="allPermisions"
+                 name="allPermisions" (change)="selectAllPermissions($event)"
+                 [ngModelOptions]="{standalone: true}"
+                 [disabled]="allPermisionsDisabled">
+          <label class="custom-control-label">Select All</label>
+        </div>
+        <div class="card mb-2 card-shadow border-0" *ngFor="let role of entityList;trackBy: trackByFn">
+          <div class="card-header d-flex justify-content-between">
+            <div>
+              <label class="m-0">{{role.EntityName}}</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" type="checkbox"
+                     [(ngModel)]="role.IsAllRolePrevilegeSelected" [checked]="role.IsAllRolePrevilegeSelected"
+                     (change)="selectAllEntityOperations($event,role.EntityName)"
+                     [ngModelOptions]="{standalone: true}"
+                     [disabled]="role.IsAllRolePrevilegeSelectedDisabled">
+              <label class="custom-control-label">Select All</label>
+            </div>
+          </div>
+
+          <div class="card-body pt-2 pb-1 chk-container">
+            <div class="row">
+              <div class="col-sm-6 col-md-3 col-lg-3 col-6 form-group"
+                   *ngFor="let operation of role.RolePrivilegeOperations;trackBy: trackByFn">
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox"
+                         name="roleprivilege"
+                         [(ngModel)]="operation.IsEnabled" [checked]="operation.IsEnabled"
+                         (change)="rowWiseSelection($event,operation,role.EntityName)"
+                         [ngModelOptions]="{standalone: true}"
+                         [disabled]="operation.IsDisabled">
+                  <label class="custom-control-label">{{operation.Operation}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="card border-0 mb-2 card-shadow" *ngIf="roleEditModeOn">
+      <div class="card-header bg-white d-flex justify-content-between">
+        <div>
+          <label class="m-0">Users</label>
+        </div>
+        <div>
+          <button type="button" id="btnCollapsedUsers"
+                  class="toggle-btn border-0 p-0 bg-transparent"
+                  (click)="getRoleUser()"
+                  [attr.aria-expanded]="!isCollapsedUsers"
+                  aria-controls="collapseUsers">
+            <span class="fa" [ngClass]="!isCollapsedUsers? 'fa-angle-down' : 'fa-angle-right'"></span>
+          </button>
+        </div>
+      </div>
+      <div class="card-body" id="collapseUsers" [ngbCollapse]="isCollapsedUsers">
+        <div class="card mb-2 card-shadow border-0" *ngFor="let item of usersList">
+          <div class="card-header d-flex justify-content-between">
+            <div>
+              <label class="m-0">{{item.FirstName}} {{item.LastName}}</label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="usersList.length == 0 ">
+          No user found with this role.
+        </div>
+      </div>
+    </div> -->
+
+    <div class="card border-0 mt-4 mb-3 bg-transparent">
+      <div class="card-body p-0">
+        <button class="btn-footer-fill mr-2" id="btnSave" [disabled]="saveBtnValidation()" (click)="onSubmit()">Save</button>
+        <button class="btn-footer-outline" id="btnCancel" (click)="navigateToListPage()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

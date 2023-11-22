@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Store</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{97cd0ae3-2361-4935-99b9-a93bf49acb19}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Store</RootNamespace>
+    <AssemblyName>Store</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultSchema>NIS</DefaultSchema>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tenant Manager" />
+    <Folder Include="Seed Data Scripts" />
+    <Folder Include="Configuration Manager" />
+    <Folder Include="EntityManager\" />
+    <Folder Include="Seed Data Scripts\Views" />
+    <Folder Include="Seed Data Scripts\Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Asset.sql" />
+    <Build Include="AssetLibrary.sql" />
+    <Build Include="AssetPathSetting.sql" />
+    <Build Include="Role.sql" />
+    <Build Include="RolePrivilege.sql" />
+    <Build Include="User.sql" />
+    <Build Include="Tenant Manager\Tenant.sql" />
+    <Build Include="Tenant Manager\TenantManagerSchema.sql" />
+    <Build Include="UserCredentialHistory.sql" />
+    <Build Include="UserLogin.sql" />
+    <Build Include="UserLoginActivityHistory.sql" />
+    <Build Include="UserRoleMap.sql" />
+    <None Include="Seed Data Scripts\City.sql" />
+    <None Include="Seed Data Scripts\State.sql" />
+    <Build Include="City.sql" />
+    <Build Include="State.sql" />
+    <Build Include="Country.sql" />
+    <Build Include="Configuration Manager\ConfigurationManager.sql" />
+    <None Include="Seed Data Scripts\PageType.sql" />
+    <None Include="Seed Data Scripts\Widget.sql" />
+    <Build Include="CustomerInfo.sql" />
+    <Build Include="TransactionDetail.sql" />
+    <Build Include="NewsAlert.sql" />
+    <Build Include="Image.sql" />
+    <Build Include="Video.sql" />
+    <Build Include="AssetSetting.sql" />
+    <None Include="Seed Data Scripts\AssetSetting.sql" />
+    <Build Include="ScheduleRunHistory.sql" />
+    <Build Include="RenderEngine.sql" />
+    <None Include="Seed Data Scripts\Entities.sql" />
+    <Build Include="BatchDetails.sql" />
+    <Build Include="BatchMaster.sql" />
+    <Build Include="CustomerMaster.sql" />
+    <Build Include="CustomerMedia.sql" />
+    <Build Include="AccountMaster.sql" />
+    <Build Include="ScheduleLog.sql" />
+    <Build Include="ScheduleLogDetail.sql" />
+    <Build Include="TenantConfiguration.sql" />
+    <None Include="Seed Data Scripts\TenantConfiguration.sql" />
+    <Build Include="AccountTransaction.sql" />
+    <Build Include="ReminderAndRecommendation.sql" />
+    <Build Include="SavingTrend.sql" />
+    <Build Include="StatementAnalytics.sql" />
+    <Build Include="StatementMetadata.sql" />
+    <Build Include="Top4IncomeSources.sql" />
+    <Build Include="AnalyticsData.sql" />
+    <Build Include="TenantContact.sql" />
+    <Build Include="ContactType.sql" />
+    <Build Include="TenantUser.sql" />
+    <Build Include="MultiTenantUserAccessMap.sql" />
+    <Build Include="DynamicWidget.sql" />
+    <Build Include="EntityFieldMap.sql" />
+    <Build Include="DynamicWidgetFilterDetail.sql" />
+    <Build Include="TTD_SubscriptionMaster.sql" />
+    <Build Include="TTD_SubscriptionSummary.sql" />
+    <Build Include="TTD_SubscriptionSpend.sql" />
+    <Build Include="TTD_UserSubscriptions.sql" />
+    <Build Include="TTD_VendorSubscription.sql" />
+    <Build Include="TTD_SubscriptionUsage.sql" />
+    <Build Include="TTD_DataUsage.sql" />
+    <Build Include="TTD_MeetingUsage.sql" />
+    <Build Include="TTD_EmailsBySubscription.sql" />
+    <Build Include="TTD_CustomerMaster.sql" />
+    <Build Include="WidgetPageTypeMap.sql" />
+    <Build Include="TenantEntity.sql" />
+    <Build Include="Seed Data Scripts\Views\View_DynamicWidget.sql" />
+    <Build Include="Seed Data Scripts\Views\View_DynamicWidget1.sql" />
+    <Build Include="Seed Data Scripts\Views\View_MultiTenantUserAccessMap.sql" />
+    <Build Include="Seed Data Scripts\Views\View_Page.sql" />
+    <Build Include="Seed Data Scripts\Views\View_PageWidgetMap.sql" />
+    <Build Include="Seed Data Scripts\Views\View_Schedule.sql" />
+    <Build Include="Seed Data Scripts\Views\View_ScheduleLog.sql" />
+    <Build Include="Seed Data Scripts\Views\View_SourceData.sql" />
+    <Build Include="Seed Data Scripts\Views\View_StatementDefinition.sql" />
+    <Build Include="Seed Data Scripts\Views\View_User.sql" />
+    <Build Include="Seed Data Scripts\Functions\FnGetParentAndChildTenant.sql" />
+    <Build Include="Seed Data Scripts\Functions\FnGetStaticAndDynamicWidgets.sql" />
+    <Build Include="Seed Data Scripts\Functions\FnUserTenant.sql" />
+    <Build Include="EntityManager\DependentOperations.sql" />
+    <Build Include="EntityManager\Entities.sql" />
+    <Build Include="EntityManager\EntityManagerSchema.sql" />
+    <Build Include="EntityManager\Operations.sql" />
+    <PostDeploy Include="Seed Data Scripts\Script.PostDeployment1.sql" />
+    <Build Include="TenantSubscription.sql" />
+    <Build Include="TenantSecurityCodeFormat.sql" />
+    <Build Include="Seed Data Scripts\Views\View_StatementMetadata.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Page.sql" />
+    <Build Include="PageType.sql" />
+    <Build Include="PageWidgetMap.sql" />
+    <Build Include="Schedule.sql" />
+    <Build Include="Statement.sql" />
+    <Build Include="StatementPageMap.sql" />
+    <Build Include="Widget.sql" />
+    <Build Include="NISSchema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Seed Data Scripts\Tenant.sql" />
+    <None Include="Seed Data Scripts\Configuration.sql" />
+    <Build Include="Configuration Manager\ConfigurationManagerSchema.sql" />
+    <None Include="Seed Data Scripts\UserAndRole.sql" />
+    <None Include="Seed Data Scripts\TruncateTable.sql" />
+    <None Include="Seed Data Scripts\Views\View_TenantSubscription.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Store.refactorlog" />
+  </ItemGroup>
+</Project>

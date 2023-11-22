@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [NIS]
+    AUTHORIZATION [dbo];
+

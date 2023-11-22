@@ -1,0 +1,180 @@
+<div class='top-bar fixed'>
+  <button class="fa float-left hamburger xs-hamburger fa" (click)="toggleNav()" [ngClass]="collapse_toogleClass" *ngIf='IsSideRequired==true'></button>
+  <div class="side-bar-logo text-center d-none d-md-block" (click)="navigateToRespectiveUserLandingPage()" style="cursor: pointer;" *ngIf='IsSideRequired==true'>
+    <img src="assets/images/new_nis_logo_white.png" width="250">
+  </div>
+  <!--mobile start-->
+  <div class="d-md-none float-right xs-top">
+    <button class="fa fa-ellipsis-v hamburger" (click)="isTopbarShow=!isTopbarShow"></button>
+  </div>
+
+  <ul class='nav nav-toolbar float-right' [ngClass]="isTopbarShow? 'show':'hide'">
+    <li class="nav-item" *ngIf='isTenantAdminUser && IsSideRequired==true'>
+      <a class="nav-link top-nav-link" id="settingsSideBar" (click)="ChangeSideBar()">
+        <i class="fa fa-cog"></i>
+      </a>
+    </li>
+    <li class="nav-item dropdown float-right">
+      <a class="nav-link top-nav-link" id="dropdownMenuButton" data-toggle="dropdown">
+        <span class="user-name-nav">{{loggedInUserName}}</span>
+        <i class="fa fa-angle-down ml-2" *ngIf='IsSideRequired==true'></i>
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf='IsSideRequired==true'>
+        <a class="dropdown-item" (click)="navigateToProfile()">Profile</a>
+        <a class="dropdown-item" (click)="navigateToChangePassword()">Change Password</a>
+        <a class="dropdown-item" (click)="switchTenant()" *ngIf="isUserHaveMultiTenantAccess">Switch Tenant</a>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <!--mobile end-->
+  <ul class='nav nav-toolbar float-right show-toolbar'>
+    <li class="nav-item" *ngIf="isTenantAdminUser && IsSideRequired==true">
+      <a class="nav-link top-nav-link" id="settingsSideBar" (click)="ChangeSideBar()">
+        <span></span>
+        <i id="HomeSettingIcon" *ngIf="!IsMainMenu" class="fa fa-home" title="Home"></i>
+        <i id="HomeSettingIcon" *ngIf="IsMainMenu" class="fa fa-cog" title="Setings"></i>
+      </a>
+    </li>
+    <!-- <li class="nav-item" *ngIf="isUserHaveMultiTenantAccess">
+      <a class="nav-link top-nav-link" id="switchTenantlink" (click)="switchTenant()" title="Switch Tenant">
+        <i class="fa fa-exchange"></i>
+      </a>
+    </li> -->
+    <li class="nav-item dropdown">
+      <a class="nav-link top-nav-link" id="dropdownMenuButton" data-toggle="dropdown">
+        <span class="user-name-nav">{{loggedInUserName}}</span>
+        <i class="fa fa-angle-down ml-2" *ngIf='IsSideRequired==true'></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf='IsSideRequired==true'>
+        <a class="dropdown-item" (click)="navigateToProfile()">Profile</a>
+        <a class="dropdown-item" (click)="navigateToChangePassword()">Change Password</a>
+        <a class="dropdown-item" (click)="switchTenant()" *ngIf="isUserHaveMultiTenantAccess">Switch Tenant</a>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="side-bar-container" [ngClass]="sidebar_class" (mouseenter)="showSidebar()" (mouseleave)="hideSidebar()">
+  <div class="side-bar-nav stylescrollbar" *ngIf='IsSideRequired==true'>
+    <ul class='side-bar-ul'>
+      <li [ngClass]="(URL=='/dashboard')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToDashoard()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Dashboard','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-machine-dashboard2' title="Dashboard"> </span><span class='nav-title'>Dashboard</span></a>
+      </li>
+
+      <li [ngClass]="(URL=='/user')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToUser()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'User','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-users-line2' title="Users"> </span><span class='nav-title'>Users</span>  </a>
+      </li>
+
+      <li [ngClass]="(URL=='/roles')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToRoles()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Role','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-roles-line2' title="Roles"> </span> <span class='nav-title'>Roles</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/assetlibrary')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToAssetLibraries()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Asset Library','Operation' : 'View'}))">
+        <a> <span class='nav-icon fa fa-folder-o' title="Asset Libraries"> </span> <span class='nav-title'>Asset Libraries</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/widgets')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToWidgets()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Widget','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-line-dashboard2' title="Widgets"></span><span class='nav-title'>Widgets</span>  </a>
+      </li>
+
+      <li [ngClass]="(URL=='/dynamicwidget')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToDynamicWidgets()">
+        <!--*ngIf="false && IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Dynamic Widget','Operation' : 'View'}))"-->
+        <a> <span class='nav-icon icon-line-dashboard2' title="Dynamic Widgets"></span><span class='nav-title'>Dynamic Widgets</span>  </a>
+      </li>
+
+      <li [ngClass]="(URL=='/pages')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToTemplates()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Page','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-templates2' title="Pages"></span><span class='nav-title'>Pages</span>  </a>
+      </li>
+
+      <li [ngClass]="(URL=='/statementdefination')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToStatementDef()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Statement Definition','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-statemenrDefinitions' title="Statement Definitions"> </span> <span class='nav-title'>Statement Definitions</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/schedulemanagement')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToScheduleManagement()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Schedule Management','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-production-plan-line2' title="Schedule Management"> </span> <span class='nav-title'>Schedule Management</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/datahub')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToDataHub()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Schedule Management','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-line-dashboard2' title="Data Hub"> </span> <span class='nav-title'>Data Hub</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/logs')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToLogs()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Log','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-reportGenerations2' title="Logs"> </span> <span class='nav-title'>Logs</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/groupManagerDashboard')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantGroupManager" (click)="navigateTogroupManagerDashboard()">
+        <a> <span class='nav-icon icon-machine-dashboard2' title="Dashboard"> </span> <span class='nav-title'>Dashboard</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/tenants')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantGroupManager" (click)="navigateToTenants()">
+        <a> <span class='nav-icon icon-users-line2' title="Tenants"> </span> <span class='nav-title'>Tenants</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/instanceManagerDashboard')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isInstanceTenantManager" (click)="navigateToinstanceManagerDashboard()">
+        <a> <span class='nav-icon icon-machine-dashboard2' title="Dashboard"> </span> <span class='nav-title'>Dashboard</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/tenantgroups')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isInstanceTenantManager" (click)="navigateToTenantGroups()">
+        <a> <span class='nav-icon icon-users-line2' title="Tenant Groups"> </span> <span class='nav-title'>Tenant Groups</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/multiTenantUserAccess')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantGroupManager" (click)="navigateToMultiTenantUserAccess()">
+        <a> <span class='nav-icon icon-roles-line2' title="Multi-Tenant User Access Mapping"> </span> <span class='nav-title'>Tenant User Access</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/contacttype')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantGroupManager" (click)="navigateToContactType()">
+        <a> <span class='nav-icon fa fa-address-card' title="Contact Type"> </span> <span class='nav-title'>Contact Type</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/analytics')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToAnalytics()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Analytics','Operation' : 'View'}))">
+        <a> <span class='nav-icon icon-rp-yield1' title="Analytics"> </span> <span class='nav-title'>Analytics</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/tenantConfiguration')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantAdminUser" (click)="navigateToTenantConfig()">
+        <a> <span class='nav-icon fa fa-cogs' title="Tenant Configuration"> </span> <span class='nav-title'>Tenant Configuration</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/settings')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantAdminUser" (click)="navigateToSettings()">
+        <a> <span class='nav-icon icon-operations2' title="Configure Assets"> </span> <span class='nav-title'>Configure Assets</span> </a>
+      </li>
+
+      <li [ngClass]="(URL=='/renderengines')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantAdminUser" (click)="navigateToRenderEngine()">
+        <a> <span class='nav-icon icon-reportGenerations2' title="NIS Engines"> </span> <span class='nav-title'>NIS Engines</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/country')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && (isTenantGroupManager || isTenantAdminUser)" (click)="navigateToCountry()">
+        <a> <span class='nav-icon fa fa-flag' title="Country"> </span> <span class='nav-title'>Country</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/pagetype')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantAdminUser" (click)="navigateToPageType()">
+        <a> <span class='nav-icon icon-templates2' title="Page Type"> </span> <span class='nav-title'>Page Type</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/themeConfiguration')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantAdminUser" (click)="navigateTothemeConfiguration()">
+        <a> <span class='nav-icon fa fa-gear' title="Theme ConfigurationComponent"> </span> <span class='nav-title'>Theme Configuration</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/tenantusers')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isInstanceTenantManager" (click)="navigateToTenantUsers()">
+        <a> <span class='nav-icon icon-users-line2' title="Users"> </span> <span class='nav-title'>Users</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/tenantgroupusers')?'side-bar-li active-li':'side-bar-li'" *ngIf="!IsMainMenu && isTenantGroupManager" (click)="navigateToTenantGroupUsers()">
+        <a> <span class='nav-icon icon-users-line2' title="Users"> </span> <span class='nav-title'>Users</span> </a>
+      </li>
+      <li [ngClass]="(URL=='/statemenetsearch')?'side-bar-li active-li':'side-bar-li'" (click)="navigateToStatemenetSearch()"
+          *ngIf="IsMainMenu && ((userClaimsRolePrivilegeOperations | filterAuthorisedRole:{EntityName:'Statement Search','Operation' : 'View'}))">
+        <a> <span class='nav-icon fa fa-search' title="Statement Search"> </span> <span class='nav-title'>Statement Search</span> </a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="content-wapper" [ngClass]="collapse_class" (click)='hideSidebar()'>
+  <router-outlet></router-outlet>
+  <div class="ftr-vrsn">V{{AppVersion}}</div>
+</div>
+

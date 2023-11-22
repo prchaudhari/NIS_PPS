@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{21AE8607-0557-4D67-96D1-7830E57EAB4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nIS</RootNamespace>
+    <AssemblyName>nIS.Exception</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Asset Library\AssetLibraryNotFoundException.cs" />
+    <Compile Include="Asset Library\AssetLibraryReferenceException.cs" />
+    <Compile Include="Asset Library\DuplicateAssetLibraryException.cs" />
+    <Compile Include="Asset Library\InvalidAssetLibraryException.cs" />
+    <Compile Include="Asset Library\InvalidAssetLibrarySearchParameter.cs" />
+    <Compile Include="Asset\AssetNotFoundException.cs" />
+    <Compile Include="Asset\AssetPathNotFoundException.cs" />
+    <Compile Include="Asset\AssetPageReferenceException.cs" />
+    <Compile Include="Asset\AssetReferenceException.cs" />
+    <Compile Include="Asset\DuplicateAssetException.cs" />
+    <Compile Include="Asset\InvalidAssetException.cs" />
+    <Compile Include="Asset\InvalidAssetPathException.cs" />
+    <Compile Include="Asset\InvalidAssetSearchParameter.cs" />
+    <Compile Include="City\CityNotFoundException.cs" />
+    <Compile Include="City\DuplicateCityFoundException.cs" />
+    <Compile Include="City\InvalidCityException.cs" />
+    <Compile Include="Client\ClientConfigurationIsInProcessException.cs" />
+    <Compile Include="Client\DeactivatedTenantGroupReferenceExceptionException.cs" />
+    <Compile Include="Client\DeactivatedTenantReferenceExceptionException.cs" />
+    <Compile Include="Client\DeleteTenantReferenceExceptionException.cs" />
+    <Compile Include="Client\DeleteTenantGroupReferenceExceptionException.cs" />
+    <Compile Include="Client\ClientNotFoundException.cs" />
+    <Compile Include="Client\ClientSubscriptionHistoryUpdatationFailedException.cs" />
+    <Compile Include="Client\DuplicateClientException.cs" />
+    <Compile Include="Client\InvalidClientException.cs" />
+    <Compile Include="Client\InvalidClientSearchParameter.cs" />
+    <Compile Include="ConnectionStringNotFoundException.cs" />
+    <Compile Include="Constants\AssetLibrary.cs" />
+    <Compile Include="Constants\CityConstant.cs" />
+    <Compile Include="Constants\ClientConstant.cs" />
+    <Compile Include="Constants\DynamicWidgetConstant.cs" />
+    <Compile Include="Constants\CountryConstant.cs" />
+    <Compile Include="Constants\ExceptionConstant.cs" />
+    <Compile Include="Constants\MultiTenantUserRoleAccessException.cs" />
+    <Compile Include="Constants\RenderEngineConstant.cs" />
+    <Compile Include="Constants\ScheduleLogConstant.cs" />
+    <Compile Include="Constants\StateConstant.cs" />
+    <Compile Include="Constants\StatementConstant.cs" />
+    <Compile Include="Constants\PageConstant.cs" />
+    <Compile Include="Constants\ScheduleConstant.cs" />
+    <Compile Include="Constants\RoleConstant.cs" />
+    <Compile Include="Constants\UserConstant.cs" />
+    <Compile Include="PageType\PageTypeNotFoundException.cs" />
+    <Compile Include="PageType\PageTypeReferenceInDynamicWidget.cs" />
+    <Compile Include="PageType\PageTypeReferenceInWidget.cs" />
+    <Compile Include="PageType\PageTypeReferenceInPage.cs" />
+    <Compile Include="PageType\DuplicatePageTypeFoundException.cs" />
+    <Compile Include="PageType\InvalidPageTypeException.cs" />
+    <Compile Include="ContactType\ContactTypeNotFoundException.cs" />
+    <Compile Include="ContactType\ContactTypeReferenceInTenantContactException.cs" />
+    <Compile Include="ContactType\DuplicateContactTypeFoundException.cs" />
+    <Compile Include="ContactType\InvalidContactTypeException.cs" />
+    <Compile Include="Dynamic Widget\WidgetSettingsNotFoundException.cs" />
+    <Compile Include="Dynamic Widget\DynamicWidgetNotFoundException.cs" />
+    <Compile Include="Dynamic Widget\DuplicateDynamicWidgetFoundException.cs" />
+    <Compile Include="Dynamic Widget\InvalidDynamicWidgetException.cs" />
+    <Compile Include="Country\CountryReferenceInTenantContactException.cs" />
+    <Compile Include="Country\CountryReferenceInTenantException.cs" />
+    <Compile Include="Country\CountryReferenceInUserException.cs" />
+    <Compile Include="Country\CountryNotFoundException.cs" />
+    <Compile Include="Country\DuplicateCountryFoundException.cs" />
+    <Compile Include="Country\InvalidCountryException.cs" />
+    <Compile Include="InvalidEncryptedDataException.cs" />
+    <Compile Include="InvalidSearchParameterException.cs" />
+    <Compile Include="InvalidTenantException.cs" />
+    <Compile Include="MultiTenantUserRoleAccess\DuplicateTenantUserRoleAccessMappingFoundException.cs" />
+    <Compile Include="MultiTenantUserRoleAccess\InvalidMultiTenantUserRoleAccessException.cs" />
+    <Compile Include="MultiTenantUserRoleAccess\MultiTenantUserRoleAccessNotFoundException.cs" />
+    <Compile Include="NullArgumentException.cs" />
+    <Compile Include="Render Engine\DuplicateRenderEngineFoundException.cs" />
+    <Compile Include="Render Engine\InvalidRenderEngineException.cs" />
+    <Compile Include="Render Engine\RenderEngineNotFoundException.cs" />
+    <Compile Include="ScheduleLog\ScheduleLogDetailNotFoundException.cs" />
+    <Compile Include="Schedule\TenantSecurityCodeFieldDataNotAvailable.cs" />
+    <Compile Include="Schedule\TenantSecurityCodeFormatNotAvailable.cs" />
+    <Compile Include="Schedule\RunningScheduleRefrenceException.cs" />
+    <Compile Include="Statement\DuplicateStatementPageFoundException.cs" />
+    <Compile Include="Statement\DuplicateStatementFoundException.cs" />
+    <Compile Include="Statement\InvalidStatementException.cs" />
+    <Compile Include="Statement\StatementNotFoundException.cs" />
+    <Compile Include="Statement\StatementReferenceException.cs" />
+    <Compile Include="Page\DuplicatePageFoundException.cs" />
+    <Compile Include="Page\DuplicatePageWidgetFoundException.cs" />
+    <Compile Include="Page\InvalidPageException.cs" />
+    <Compile Include="Page\PageNotFoundException.cs" />
+    <Compile Include="Page\PageReferenceException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryStoreNotAccessibleException.cs" />
+    <Compile Include="Schedule\DuplicateScheduleFoundException.cs" />
+    <Compile Include="Schedule\InvalidScheduleException.cs" />
+    <Compile Include="Schedule\ScheduleNotFoundException.cs" />
+    <Compile Include="Role\DuplicateRoleFoundException.cs" />
+    <Compile Include="Role\InvalidRoleException.cs" />
+    <Compile Include="Role\RoleNotFoundException.cs" />
+    <Compile Include="State\DuplicateStateFoundException.cs" />
+    <Compile Include="State\InvalidStateException.cs" />
+    <Compile Include="State\StateNotFoundException.cs" />
+    <Compile Include="TenantNotFoundException.cs" />
+    <Compile Include="TenantContact\DuplicateUserEmailAddressFoundException.cs" />
+    <Compile Include="TenantContact\DuplicateUserFoundException.cs" />
+    <Compile Include="TenantContact\DuplicateUserMobileNumberFoundException.cs" />
+    <Compile Include="TenantContact\InvalidUserException.cs" />
+    <Compile Include="TenantContact\UserNotFoundException.cs" />
+    <Compile Include="TenantUser\DuplicateUserEmailAddressFoundException.cs" />
+    <Compile Include="TenantUser\DuplicateUserFoundException.cs" />
+    <Compile Include="TenantUser\DuplicateUserMobileNumberFoundException.cs" />
+    <Compile Include="TenantUser\InvalidUserException.cs" />
+    <Compile Include="TenantUser\UserNotFoundException.cs" />
+    <Compile Include="User\AlreadyUsedPasswordException.cs" />
+    <Compile Include="User\DeactivatedUserLoginException.cs" />
+    <Compile Include="User\DuplicateUserEmailAddressFoundException.cs" />
+    <Compile Include="User\UserReferenceInTenantGroupException.cs" />
+    <Compile Include="User\DuplicateUserFoundException.cs" />
+    <Compile Include="User\DuplicateUserMobileNumberFoundException.cs" />
+    <Compile Include="User\InvalidPasswordFormatException.cs" />
+    <Compile Include="User\InvalidUserException.cs" />
+    <Compile Include="User\InvalidUserPasswordException.cs" />
+    <Compile Include="User\LastUsedPasswordException.cs" />
+    <Compile Include="User\UserLockedException.cs" />
+    <Compile Include="User\UserNotFoundException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

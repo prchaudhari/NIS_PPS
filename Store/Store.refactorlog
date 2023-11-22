@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="99e444fc-ac3c-4dc5-b5ab-af09c4e97683" ChangeDateTime="09/23/2020 14:42:29">
+    <Property Name="ElementName" Value="[NIS].[Schedule].[NoOf]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[NIS].[Schedule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsEndsAfter" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7c967fca-419c-4283-9b65-cf007655775a" ChangeDateTime="09/23/2020 14:42:40">
+    <Property Name="ElementName" Value="[NIS].[Schedule].[IsEndsAfter]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[NIS].[Schedule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsEndsAfterNoOfRecurrence" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b85857a3-48e0-4573-8a24-8860d9916080" ChangeDateTime="09/30/2020 04:42:53">
+    <Property Name="ElementName" Value="[NIS].[MultiTenantUserAccessMap].[AssociatedTenantId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[NIS].[MultiTenantUserAccessMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AssociatedTenantCode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="20094625-f246-43b4-aa93-d5ab504a81d6" ChangeDateTime="09/30/2020 04:43:02">
+    <Property Name="ElementName" Value="[NIS].[MultiTenantUserAccessMap].[OtherTenantId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[NIS].[MultiTenantUserAccessMap]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OtherTenantCode" />
+  </Operation>
+</Operations>

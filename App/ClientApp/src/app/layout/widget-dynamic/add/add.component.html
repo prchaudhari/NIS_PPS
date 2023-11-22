@@ -1,0 +1,159 @@
+<div class="main-container">
+  <div class="page-title d-flex justify-content-between">
+    <span class="xs-title" *ngIf="!updateOperationMode">Add Dynamic Widget</span>
+    <span class="xs-title" *ngIf="updateOperationMode">Update Dynamic Widget</span>
+  </div>
+
+  <div class="card border-0 mb-2 card-shadow">
+    <form [formGroup]="DynamicWidgetForm">
+      <div class="card-body position-relative">
+
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="row">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 form-group">
+                <label>Widget Name</label><span class="text-danger ml-2">*</span>
+                <input type="text" class="form-control" formControlName="WidgetName" />
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 form-group">
+                <label>Title</label><span class="text-danger ml-2">*</span>
+                <input type="text" class="form-control" formControlName="WidgetTitle" />
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 form-group">
+                <label>Entity</label><span class="text-danger ml-2">*</span>
+                <select formControlName="Entity" [attr.disabled]="updateOperationMode?'':null" (change)="onEntitySelected($event)" class="form-control">
+                  <option *ngFor="let pt of entityList" [value]="pt.Identifier">{{pt.Name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <label>Widget Type</label><span class="text-danger ml-2">*</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='Form') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetForm" (click)="setWidgetType('Form')" [checked]="selectedLink=='Form'">
+                      <span class="fa fa-list-alt"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">Form</label>
+                </div>
+                <!--repeat end-->
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='Table') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetTable" (click)="setWidgetType('Table')" [checked]="selectedLink=='Table'">
+                      <span class="fa fa-table"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">Table</label>
+                </div>
+                <!--repeat end-->
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='LineGraph') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetLineGraph" (click)="setWidgetType('LineGraph')" [checked]="selectedLink=='LineGraph'">
+                      <span class="fa fa-line-chart"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">Line Graph</label>
+                </div>
+                <!--repeat end-->
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='BarGraph') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetBarGraph" (click)="setWidgetType('BarGraph')" [checked]="selectedLink=='BarGraph'">
+                      <span class="fa fa-bar-chart"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">Bar Graph</label>
+                </div>
+                <!--repeat end-->
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='PieChart') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetPieChart" (click)="setWidgetType('PieChart')" [checked]="selectedLink=='PieChart'">
+                      <span class="fa fa-pie-chart"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">Pie Chart</label>
+                </div>
+                <!--repeat end-->
+                <!--repeat start-->
+                <div class="widget-card-small widget-card" *ngIf="(updateOperationMode && selectedLink=='Html') || !updateOperationMode">
+                  <div class="hide-radio widget-icons">
+                    <label>
+                      <input type="radio" name="widgetType" id="inputWidgetHtml" (click)="setWidgetType('Html')" [checked]="selectedLink=='Html'">
+                      <span class="fa fa-code"></span>
+                    </label>
+                  </div>
+                  <label class="text-center width100 pt-2 m-0 widget-name">HTML</label>
+                </div>
+                <!--repeat end-->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <label>Page Type</label><span class="text-danger ml-2">*</span>
+
+              </div>
+            </div>
+            <div class="row">
+
+              <div *ngFor="let pageType of pageTypeList" class="col-xl-3 col-lg-3 col-md-4 col-sm-4 form-group">
+                <div class="d-flex justify-content-between">
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" [ngModelOptions]="{standalone: true}"
+                           [disabled]="updateOperationMode"
+                           type="checkbox" name="pageType"
+                           (change)="onPageSelected($event,pageType)"
+                           [(ngModel)]="pageType.IsChecked"
+                           [checked]="pageType.IsChecked" />
+                    <label class="custom-control-label">{{pageType.PageTypeName}}</label>
+                  </div>
+                </div>
+                <!--<ng-multiselect-dropdown [data]="pageTypeList"
+                                         [settings]="pageTypedropdownSettings"
+                                         (onSelect)="onItemSelectPageType($event)"
+                                         (onSelectAll)="onSelectAllPageType($event)"
+                                         [(ngModel)]="pageTypeselectedItems"
+                                         formControlName="PageType"
+                                         (onDeSelect)="onItemDeSelectPageType($event)"
+                                         (onDeSelectAll)="onItemDeSelectAllPageType($event)"
+                                         name="fieldName" ngDefaultControl >
+                </ng-multiselect-dropdown>-->
+
+                <div class="validation-msg" style="color:red">
+                  <ul *ngIf="isPageTypeFileDropdownError" style="list-style-type:none">
+                    <li class="text-danger">
+                      Please select page type
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card border-0 mt-4 mb-3 bg-transparent">
+    <div class="card-body p-0">
+      <button class="btn-footer-fill mr-2" id="btnSave" [disabled]="disableSave()" (click)="saveWidgetDetails()">Save </button>
+      <button class="btn-footer-fill mr-2" id="btnNext" [disabled]="disableSave()" (click)="navigationToDesigner()">Next </button>
+      <button class="btn-footer-outline" id="btnCancel" (click)="navigateToListPage()">Cancel</button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,181 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\confirm-user\confirm-user.component.ts" />
+    <None Remove="ClientApp\src\app\layout\asset-libraries\asset-library.service.ts" />
+    <None Remove="ClientApp\src\app\layout\asset-libraries\asset-library.ts" />
+    <None Remove="ClientApp\src\app\layout\asset-settings\asset-setting.ts" />
+    <None Remove="ClientApp\src\app\layout\contacttype\contacttype.ts" />
+    <None Remove="ClientApp\src\app\layout\country\country.ts" />
+    <None Remove="ClientApp\src\app\layout\logs-details\log-details.ts" />
+    <None Remove="ClientApp\src\app\layout\logs\scheduleLog.ts" />
+    <None Remove="ClientApp\src\app\layout\pagetype\pagetype.ts" />
+    <None Remove="ClientApp\src\app\layout\schedule-management\schedule.ts" />
+    <None Remove="ClientApp\src\app\layout\schedule-management\scheduleHitory.ts" />
+    <None Remove="ClientApp\src\app\layout\sourcedata\sourcedata.ts" />
+    <None Remove="ClientApp\src\app\layout\statement-defination\statement.ts" />
+    <None Remove="ClientApp\src\app\layout\statement-search\statementSearch.ts" />
+    <None Remove="ClientApp\src\app\layout\tenant-configuration\tenantConfiguration.service.ts" />
+    <None Remove="ClientApp\src\app\layout\tenant-configuration\tenatConfiguration.ts" />
+    <None Remove="ClientApp\src\app\layout\tenants\tenant.ts" />
+    <None Remove="ClientApp\src\app\layout\tenantuser\tenantuser.ts" />
+    <None Remove="ClientApp\src\app\layout\users\user.ts" />
+    <None Remove="ClientApp\src\app\layout\widget-dynamic\dynamicwidget.ts" />
+    <None Remove="ClientApp\src\app\layout\widgets\widget.service.ts" />
+    <None Remove="ClientApp\src\app\layout\widgets\Widget.ts" />
+    <None Remove="ClientApp\src\app\shared\models\CommonModel.ts" />
+    <None Remove="ClientApp\src\app\shared\modules\pagination\pagination.module.ts" />
+    <None Remove="ClientApp\src\app\shared\widgetpreview\widgetpreview.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\app\AppSettings.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\authentication\authentication-routing.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\authentication\authentication.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\authentication\authentication.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\authentication\authentication.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\authentication\authentication.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\core\core.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\core\services\window-ref.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\EnvSpecific.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\contacttype\contacttype.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\country\country.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\instancemanagerdashboard\dashboard.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\logs-details\logs-details.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\logs\schedulelog.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\pagetype\pagetype.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\roles\role.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\schedule-management\schedule.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\sourcedata\sourcedata.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\statement-defination\statement.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\statement-search\statementSearch.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\tenants\tenant.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\tenantuser\tenantuser.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\users\user.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\users\user.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\layout\widget-dynamic\dynamicwidget.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\login\login.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\constants\configConstants.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\constants\constants.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\enums\search-mode.enum.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\enums\sort-order.enum.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\message\messagebox.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\custom-template.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\pagination-controls.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\pagination-controls.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\pagination-controls.directive.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\pagination-controls.directive.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\modules\pagination\template.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\models\roleEntity.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\models\rolePrivilege.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\pipes\array-sort-pipe.pipe.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\pipes\array-sort-pipe.pipe.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\pipes\filter.pipe.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\pipes\filter.pipe.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\pipes\shared-pipes.module.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\urlConfiguration\urlconfiguration.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\cellsrenderer.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\local-storage.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\local-storage.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\mesage-dialog.service.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\resource.service.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\app\shared\services\resource.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\env-specific.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\contacttype\contacttype.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\country\country.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\logs-details\log-details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\logs\scheduleLog.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\pagetype\pagetype.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\schedule-management\scheduleHitory.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\sourcedata\sourcedata.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\statement-defination\statement.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\statement-search\statementSearch.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\widget-dynamic\dynamicwidget.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="ClientApp\src\app\layout\widgets\widget.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

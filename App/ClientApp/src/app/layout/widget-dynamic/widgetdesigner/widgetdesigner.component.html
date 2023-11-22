@@ -1,0 +1,605 @@
+<div class="main-container">
+  <div class="page-title d-flex justify-content-between">
+    <span class="xs-title">Dynamic Widgets - {{WidgetType}} </span>
+  </div>
+  <div class="card border-0 mb-2 card-shadow">
+    <form [formGroup]="DynamicWidgetForm">
+      <div class="card-body position-relative">
+        <!--<div class="row">
+          <span>Page Type | {{PageTypeName}} </span>
+          <span>Entity | {{EntityName}} </span>
+          <span>Name | {{WidgetName}} </span>
+          <span>Title | {{Title}} </span>
+          <span>Widget Type| {{WidgetType}} </span>
+        </div>-->
+        <div class="row">
+          <div class="col-sm-7">
+            <!--if form-->
+            <div class="row" *ngIf="isSelected('Form')">
+              <div class="col-sm-12 form-group">
+                <div class="card bg-light border-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-5 col-lg-5 col-sm-5">
+                        <label>Field Name</label><span class="text-danger ml-2">*</span>
+                        <select formControlName="FormEntityField" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of entityFieldList" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-5 col-lg-5 col-sm-5">
+                        <label>Display Name</label><span class="text-danger ml-2">*</span>
+                        <input type="text" class="form-control" formControlName="FormFieldDisplayName" />
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-4">
+                        <label class="d-block">&nbsp;</label>
+                        <button class="btn-footer-fill" id="btnAdd" [disabled]="disableAddFieldDetails('Form')" (click)="addFieldDetails('Form')">Add </button>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="formList.length>0">
+                      <div class="col-sm-12 p-1">
+                        <div cdkDropList
+                             class="example-list" style="height:auto;background:transparent;"
+                             (cdkDropListDropped)="drop($event)">
+                          <div class="example-box p-2" *ngFor="let list of formList;let i=index" cdkDrag>
+                            <div class="row width100">
+                              <div class="col-sm-6">
+                                <span class="d-inline-block mt-1">{{list.FieldName}}</span>
+                              </div>
+                              <div class="col-sm-5">
+                                <span class="d-inline-block mt-1">{{list.DisplayName}}</span>
+                              </div>
+                              <div class="col-sm-1">
+                                <div class="action-btns btn-tbl-action">
+                                  <button type="button" title="Delete" (click)="deleteFieldDetails('Form',i)">
+                                    <span class="fa fa-trash"></span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!--if pie-->
+            <div class="row" *ngIf="isSelected('PieChart')">
+              <div class="col-sm-12 form-group">
+                <div class="card bg-light border-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <!--<div class="col-md-6 col-lg-6 col-sm-6 form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" formControlName="PieTitle" />
+                      </div>-->
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+                        <label>Series</label><span class="text-danger ml-2">*</span>
+                        <select formControlName="PieSeries" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of pieChartSeriesEntityFields " [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+                        <label>Display Name</label>
+                        <input type="text" class="form-control" formControlName="PieSeriesName" />
+                      </div>
+                      <div class="col-md-4 col-lg-4 col-sm-4 form-group">
+                        <label>Value</label><span class="text-danger ml-2">*</span>
+                        <select formControlName="PieValue" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of pieChartValueEntityFields" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--if line-->
+            <div class="row" *ngIf="isSelected('LineGraph') || isSelected('BarGraph')">
+              <div class="col-sm-12 form-group">
+                <div class="card bg-light border-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <!--<div class="col-md-5 col-lg-5 col-sm-5 form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" formControlName="LineBarTitle" />
+                      </div>-->
+                      <div class="col-md-5 col-lg-5 col-sm-5 form-group">
+                        <label>X-Axis</label><span class="text-danger ml-2">*</span>
+                        <select class="form-control" formControlName="LineBarXAxis">
+                          <option value="0"> Select</option>
+                          <option value="Month"> Month</option>
+                          <option value="Date"> Date</option>
+                          <option value="Time"> Time</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5 col-lg-5 col-sm-5">
+                        <label>Field Name</label><span class="text-danger ml-2">*</span>
+                        <select formControlName="LineBarEntityField" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of lineBarGraphFields" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-5 col-lg-5 col-sm-5">
+                        <label>Display Name</label><span class="text-danger ml-2">*</span>
+                        <input type="text" class="form-control" formControlName="LineBarFieldDisplayName" />
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-2">
+                        <label class="d-block">&nbsp;</label>
+                        <button class="btn-footer-fill" [disabled]="disableAddFieldDetails('LineBraGraph')" (click)="addFieldDetails('LineBraGraph')" id="btnAdd">Add</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class=" col-sm-12" *ngIf="lineBarGraphList.length>0">
+                        <div class="widget-area-grid padding-0" style="height:auto">
+                          <table mat-table [dataSource]="dataSource" matSort class="table-cust">
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="series">
+                              <th class="width50" mat-header-cell *matHeaderCellDef> Field Name </th>
+                              <td mat-cell *matCellDef="let list">{{list.FieldName}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="displayName">
+                              <th class="width40" mat-header-cell *matHeaderCellDef> Display Name </th>
+                              <td mat-cell *matCellDef="let list">{{list.DisplayName}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="actions">
+                              <th class="width10" mat-header-cell *matHeaderCellDef> Action </th>
+                              <td mat-cell *matCellDef="let list">
+                                <div class="action-btns btn-tbl-action">
+                                  <button type="button" id="btnUpdateRole" title="Delete Series" (click)="deleteFieldDetails('LineBarGraph',list.FieldId)">
+                                    <span class="fa fa-trash"></span>
+                                  </button>
+                                </div>
+                              </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--if table-->
+            <div class="row" *ngIf="isSelected('Table')">
+              <div class="col-sm-12 form-group">
+                <div class="card bg-light border-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <!--<div class="col-md-8 col-lg-8 col-sm-8 form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" formControlName="TableTitle" />
+                      </div>-->
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 col-lg-4 col-sm-4">
+                        <label>Field Name</label><span class="text-danger ml-2">*</span>
+                        <select formControlName="TableEntityField" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of entityFieldList" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 col-lg-4 col-sm-4">
+                        <label>Header Name</label><span class="text-danger ml-2">*</span>
+                        <input type="text" class="form-control" formControlName="TableHeaderName" />
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-2">
+                        <label>Sorting</label>
+                        <div>
+                          <label class="switch"><input id="inputJobStart" formControlName="TableIsSorting" type="checkbox"><span class="slider round"></span></label>
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-4">
+                        <label class="d-block mb-1">&nbsp;</label>
+                        <button class="btn-footer-fill" id="btnAdd" [disabled]="disableAddFieldDetails('Table')" (click)="addFieldDetails('Table')">Add</button>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="tableHeader.length>0">
+                      <div class="col-sm-12 p-1">
+                        <div cdkDropList
+                             class="example-list" style="height:auto;background:transparent;"
+                             (cdkDropListDropped)="drop($event)">
+                          <div class="example-box p-2" *ngFor="let list of tableHeader;let i=index" cdkDrag>
+                            <div class="row width100">
+                              <div class="col-sm-5">
+                                <span class="d-inline-block mt-1">{{list.FieldName}}</span>
+                              </div>
+                              <div class="col-sm-5">
+                                <span class="d-inline-block mt-1">{{list.HeaderName}}</span>
+                              </div>
+                              <div class="col-sm-1">
+                                <span *ngIf="list.IsSorting==true" class="fa fa-toggle-on text-success" title="Yes"></span>
+                                <span *ngIf="list.IsSorting==false" class="fa fa-toggle-off text-danger" title="No"></span>
+                              </div>
+                              <div class="col-sm-1">
+                                <div class="action-btns btn-tbl-action">
+                                  <button type="button" title="Delete" (click)="deleteFieldDetails('Table',i)">
+                                    <span class="fa fa-trash"></span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--if html-->
+            <!--if html-->
+            <div class="row" *ngIf="isSelected('Html')">
+              <div class="col-sm-12 form-group">
+                <div class="card bg-light border-card">
+                  <div class="card-body">
+
+                    <div class="row">
+                      <div class="col-md-5 col-lg-5 col-sm-5 form-group">
+                        <label>Asset Library</label>
+                        <select formControlName="HTMLAssetLibrary" (change)="onAssetLibrarySelected($event)" class="form-control">
+                          <option *ngFor="let al of assetLibraryList" [value]="al.Identifier">{{al.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-5 col-lg-5 col-sm-5 form-group">
+                        <label>Asset</label>
+                        <select formControlName="HTMLAsset" class="form-control">
+                          <option *ngFor="let ast of assets" [value]="ast.Identifier">{{ast.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-4">
+                        <label class="d-block">&nbsp;</label>
+                        <button class="btn-footer-fill" id="btnAdd" [disabled]="disableAssetAdd()" (click)="AddAsset()">Add</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5 col-lg-5 col-sm-5 form-group">
+                        <label>Field Name</label>
+                        <select formControlName="HTMLEntityField" (change)="onEntityFieldSelected($event,'Form')" class="form-control">
+                          <option *ngFor="let pt of entityFieldList" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2 col-lg-2 col-sm-4">
+                        <label class="d-block">&nbsp;</label>
+                        <button class="btn-footer-fill" id="btnAdd" [disabled]="disableAddHTMLField()" (click)="AddHTMLField()">Add</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 form-group">
+                        <!--<form #form='ngForm' (ngSubmit)="onSubmit(form)">-->
+                        <ejs-richtexteditor id='customRTE' #customRTE
+                                            [toolbarSettings]='tools'
+                                            [value]='editorValue' [insertImageSettings]='insertImageSettings'
+                                            >
+
+                        </ejs-richtexteditor>
+
+
+
+                        <!--</form>-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <label>Filter</label>
+                <div class="card border-card bg-light">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-2 col-md-2 col-lg-2">
+                        <label>&nbsp;</label>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <label>Field</label>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <label>Operator</label>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <label>Value</label>
+                      </div>
+                      <div class="col-sm-1 col-md-1 col-lg-1">
+                        <label>&nbsp;</label>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col-sm-2 col-md-2 col-lg-2">
+                        <select class="form-control pl-1" *ngIf="displayWidgetFilterlist.length>0" formControlName="FilterConditionOperator">
+                          <option value="0">Select</option>
+                          <option value="AND">AND</option>
+                          <option value="OR">OR</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <select formControlName="FilterField" class="form-control">
+                          <option *ngFor="let pt of entityFieldList" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <select formControlName="FilterOperator" class="form-control">
+                          <option *ngFor="let pt of conditionList" [value]="pt.Identifier">{{pt.Name}}</option>
+                        </select>
+
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <input type="text" class="form-control" formControlName="FilterValue" />
+                      </div>
+                      <div class="col-sm-1 col-md-1 col-lg-1">
+                        <div class="action-btns btn-tbl-action">
+                          <button type="button" id="btnUpdateRole" title="Add" [disabled]="disableAddFilterCondition()" (click)="AddFilterCondition()">
+                            <span class="fa fa-plus"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <!--repeat start-->
+                    <div class="row form-group" *ngFor="let list of displayWidgetFilterlist">
+                      <div class="col-sm-2 col-md-2 col-lg-2">
+                        <select class="form-control pl-1" *ngIf="list.Sequence>1" disabled>
+                          <option selected>{{list.ConditionalOperator}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <select class="form-control" disabled>
+                          <option selected>{{list.FieldName}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <select class="form-control" disabled>
+                          <option selected>{{list.OperatorName}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-lg-3">
+                        <input type="text" class="form-control" [readonly]="true" value="{{list.Value}}" />
+                      </div>
+                      <div class="col-sm-1 col-md-1 col-lg-1">
+                        <div class="action-btns btn-tbl-action" *ngIf="list.Sequence>1 || displayWidgetFilterlist.length==1">
+                          <button type="button" id="btnUpdateRole" title="Delete" (click)="DeleteFilterCondition(list.Sequence)">
+                            <span class="fa fa-trash"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!--repeat end-->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <label>Select Theme</label>
+                <div class="width100 form-group d-flex justify-content-start">
+                  <div class="custom-control custom-radio mr-2">
+                    <input class="custom-control-input" type="radio"
+                           name="themeoption" id="Default" value="option1" [checked]="isDefault" (click)="isDefaultClicked()">
+                    <label class="custom-control-label dir-rtl" for="Default">
+                      Default
+                    </label>
+                  </div>
+                  <div class="custom-control custom-radio mr-2">
+                    <input class="custom-control-input" type="radio"
+                           name="themeoption" id="Custome" value="option1" [checked]="isCustome" (click)="isCustomeClicked()">
+                    <label class="custom-control-label dir-rtl" for="Custome">
+                      Custom
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="isCustome">
+              <div class="card bg-light border-card form-group" *ngIf="isSelected('LineGraph') || isSelected('BarGraph') || isSelected('PieChart')">
+                <div class="card-header bg-white">
+                  <label class="mb-0">Select Color Theme</label>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!--<label>Select Color Theme</label>-->
+                      <div class="custom-control custom-radio mr-2 mb-2">
+                        <input class="custom-control-input" type="radio" [checked]="selectedTheme=='Theme1'" (click)="selectTheme('Theme1')"
+                               name="themeChartOption" id="Default" value="optionthemeChart">
+                        <label class="custom-control-label dir-rtl" for="themeChart1">
+                          <div class="d-flex justify-content-start">
+                            <div class="clr-box" style="background-color:#342ead"></div>
+                            <div class="clr-box" style="background-color:#EA6227"></div>
+                            <div class="clr-box" style="background-color:#f2a51a"></div>
+                            <div class="clr-box" style="background-color:#b9ebcc"></div>
+                          </div>
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio mr-2">
+                        <input class="custom-control-input" type="radio" [checked]="selectedTheme=='Theme2'" (click)="selectTheme('Theme2')"
+                               name="themeChartOption" id="Default" value="optionthemeChart">
+                        <label class="custom-control-label dir-rtl" for="themeChart2">
+                          <div class="d-flex justify-content-start">
+                            <div class="clr-box" style="background-color: #45046a"></div>
+                            <div class="clr-box" style="background-color: #5c2a9d"></div>
+                            <div class="clr-box" style="background-color: #b5076b"></div>
+                            <div class="clr-box" style="background-color: #f1ebbb"></div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="custom-control custom-radio mr-2 mb-2">
+                        <input class="custom-control-input" type="radio" [checked]="selectedTheme=='Theme3'" (click)="selectTheme('Theme3')"
+                               name="themeChartOption" id="Default" value="optionthemeChart">
+                        <label class="custom-control-label dir-rtl" for="themeChart3">
+                          <div class="d-flex justify-content-start">
+                            <div class="clr-box" style="background-color: #5fdde5"></div>
+                            <div class="clr-box" style="background-color: #f4ea8e"></div>
+                            <div class="clr-box" style="background-color: #f37121"></div>
+                            <div class="clr-box" style="background-color: #d92027"></div>
+                          </div>
+                        </label>
+                      </div>
+                      <div class="custom-control custom-radio mr-2">
+                        <input class="custom-control-input" type="radio" [checked]="selectedTheme=='Theme4'" (click)="selectTheme('Theme4')"
+                               name="themeChartOption" id="Default" value="optionthemeChart">
+                        <label class="custom-control-label dir-rtl" for="themeChart4">
+                          <div class="d-flex justify-content-start">
+                            <div class="clr-box" style="background-color: #805D93;"></div>
+                            <div class="clr-box" style="background-color: #F49FBC;"></div>
+                            <div class="clr-box" style="background-color: #9EBD6E;"></div>
+                            <div class="clr-box" style="background-color: #169873;"></div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card bg-light border-card form-group">
+                <div class="card-header bg-white">
+                  <label class="mb-0">Title Font</label><span class="text-danger ml-2">*</span>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <label> Color</label><span class="text-danger ml-2">*</span>
+                      <input type="color" formControlName="TitleColor" class="form-control" />
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Size</label><span class="text-danger ml-2">*</span>
+                      <input type="number"  min="1" formControlName="TitleSize" class="form-control" />
+                      <div class="validation-msg" style="color:red">
+                        <ul *ngIf="TitleSize.touched && TitleSize.errors" style="list-style-type:none">
+                          <li class="text-danger" *ngIf="TitleSize.errors?.pattern">Invalid font size</li>
+                          <li class="text-danger" *ngIf="TitleSize.errors?.required">Font size required</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Weight</label><span class="text-danger ml-2">*</span>
+                      <select class="form-control" formControlName="TitleWeight">
+                        <option value="0">Select</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Italic">Italic</option>
+                        <option value="Bold">Bold</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3 col-sm-6 form-group">
+                      <label> Type</label><span class="text-danger ml-2">*</span>
+                      <select formControlName="TitleType" class="form-control">
+                        <option *ngFor="let pt of fontFamilyList" [value]="pt.Identifier">{{pt.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="card bg-light border-card form-group">
+                <div class="card-header bg-white">
+                  <label class="mb-0">Header/Label Font</label>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <label> Color</label><span class="text-danger ml-2">*</span>
+                      <input type="color" class="form-control" formControlName="HeaderColor" />
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Size</label><span class="text-danger ml-2">*</span>
+                      <input type="number"  min="1" class="form-control" formControlName="HeaderSize" />
+                      <div class="validation-msg" style="color:red">
+                        <ul *ngIf="HeaderSize.touched && HeaderSize.errors" style="list-style-type:none">
+                          <li class="text-danger" *ngIf="HeaderSize.errors?.pattern">Invalid font size</li>
+                          <li class="text-danger" *ngIf="HeaderSize.errors?.required">Font size required</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Weight</label><span class="text-danger ml-2">*</span>
+                      <select class="form-control" formControlName="HeaderWeight">
+                        <option value="0">Select</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Italic">Italic</option>
+                        <option value="Bold">Bold</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3 col-sm-6 form-group">
+                      <label> Type</label><span class="text-danger ml-2">*</span>
+                      <select class="form-control" formControlName="HeaderType">
+                        <option *ngFor="let pt of fontFamilyList" [value]="pt.Identifier">{{pt.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card bg-light border-card form-group">
+                <div class="card-header bg-white">
+                  <label class="mb-0">Data Font</label>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                      <label> Color</label><span class="text-danger ml-2">*</span>
+                      <input type="color" class="form-control" formControlName="DataColor" />
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Size</label><span class="text-danger ml-2">*</span>
+                      <input type="number"  min="1" class="form-control" formControlName="DataSize" />
+                      <div class="validation-msg" style="color:red">
+                        <ul *ngIf="DataSize.touched && DataSize.errors" style="list-style-type:none">
+                          <li class="text-danger" *ngIf="DataSize.errors?.pattern">Invalid font size</li>
+                          <li class="text-danger" *ngIf="DataSize.errors?.required">Font size required</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <label> Weight</label><span class="text-danger ml-2">*</span>
+                      <select class="form-control" formControlName="DataWeight">
+                        <option value="0">Select</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Italic">Italic</option>
+                        <option value="Bold">Bold</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3 col-sm-6 form-group">
+                      <label> Type</label><span class="text-danger ml-2">*</span>
+                      <select class="form-control" formControlName="DataType">
+                        <option *ngFor="let pt of fontFamilyList" [value]="pt.Identifier">{{pt.Name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+         
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card border-0 mt-4 mb-3 bg-transparent">
+    <div class="card-body p-0">
+      <button class="btn-footer-fill mr-2" id="btnSave" [disabled]="saveButtonValidation()" (click)="saveWidgetDetails()">Save </button>
+      <button class="btn-footer-fill mr-2" id="btnSave" (click)="NavigateToBack()">Back </button>
+      <button class="btn-footer-outline" id="btnCancel" (click)="navigateToListPage()">Cancel</button>
+    </div>
+  </div>
+</div>
+

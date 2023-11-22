@@ -1,0 +1,76 @@
+<div class="main-container">
+  <div class="page-title">
+    <span class="xs-title" *ngIf="pageEditModeOn == false"> Add Page  </span>
+    <span class="xs-title" *ngIf="pageEditModeOn == true"> Update Page  </span>
+  </div>
+
+  <form [formGroup]="pageFormGroup" name="pageForm">
+    <div class="card border-0 mb-2 card-shadow">
+      <div class="card-body">
+        <div class="row form-group">
+          <div class="col-md-4 col-lg-4">
+            <label id="lblPageName" for="inputPageName" >Name</label> <span class="text-danger"> *</span>
+            <input type="text" class="form-control" id="inputPageName" formControlName="pageName"/>
+            <div class="validation-msg" style="color:red" *ngIf="pf.pageName.touched && pf.pageName.errors">
+              <ul style="list-style-type:none">
+                  <li class="text-danger" *ngIf="pf.pageName.errors?.pattern">Invalid page name</li>
+                  <li class="text-danger" *ngIf="pf.pageName.errors?.required">Page name required</li>
+                  <li class="text-danger" *ngIf="pf.pageName.errors?.minlength">
+                    Page name length should not be less than 2
+                  </li>
+                  <li class="text-danger" *ngIf="pf.pageName.errors?.maxlength">
+                    Page name length should not be greater than 50
+                  </li>
+              </ul>
+          </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <label id="lblPageType" for="inputageType">Page Type</label> <span class="text-danger"> *</span>
+            <select id="inputageType" formControlName="pageType" (change)="onPageTypeSelected($event)" class="form-control" [disableControl]="pageEditModeOn">
+              <option *ngFor="let pt of pageTypelist" [value]="pt.Identifier">{{pt.PageTypeName}}</option>
+            </select>
+            <div class="validation-msg" style="color:red">
+              <ul style="list-style-type:none" *ngIf="pageFormErrorObject.showPageTypeError">
+                <li class="text-danger">Please select page type</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group mt-4">
+          <div class="col-md-12 col-lg-12">
+            <h6>Background Image</h6>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <label id="lblAssetLibrary" for="AssetLibraryId">Asset Library</label>
+            <select id="AssetLibraryId" formControlName="assetLibrary" (change)="onAssetLibrarySelected($event)" class="form-control" >
+              <option *ngFor="let al of assetLibraryList" [value]="al.Identifier">{{al.Name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <label id="lblAssets" for="AssetId">Assets</label>
+            <select id="AssetId" formControlName="asset" class="form-control">
+              <option *ngFor="let ast of assets" [value]="ast.Identifier">{{ast.Name}}</option>
+            </select>
+          </div>
+          <div class="col-md-8 col-lg-8 text-center mt-3">
+            <label>OR</label>
+          </div>
+          <div class="col-md-8 col-lg-8">
+            <label id="lblBackgroundImageUrl" for="BackgroundImageUrl" >URL</label>
+            <input type="text" class="form-control" id="BackgroundImageUrl" formControlName="pageBackgroundImageUrl" (change)="OnBackgroundImageUrlChange()"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 mt-4 mb-3 bg-transparent">
+      <div class="card-body p-0">
+        <button class="btn-footer-fill mr-2" id="btnSave" [disabled]="saveBtnValidation()" (click)="OnSaveBtnClicked()">Save</button>
+        <button class="btn-footer-fill mr-2" id="btnNext" [disabled]="saveBtnValidation()" (click)="navigationTodashboardDesigner()">Next</button>
+        <button class="btn-footer-outline" id="btnCancel" (click)="navigateToListPage()">Cancel</button>
+      </div>
+    </div>
+
+  </form>
+</div>

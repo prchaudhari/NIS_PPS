@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C24293E6-BCF7-43BE-B437-F180C261CC8E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>nIS</RootNamespace>
+    <AssemblyName>nIS.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.3.3.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AccountMasterRecord.cs" />
+    <Compile Include="Entities\AccountTransactionRecord.cs" />
+    <Compile Include="Entities\AnalyticsDataRecord.cs" />
+    <Compile Include="Entities\AssetLibraryRecord.cs" />
+    <Compile Include="Entities\AssetPathSettingRecord.cs" />
+    <Compile Include="Entities\AssetRecord.cs" />
+    <Compile Include="Entities\AssetSettingRecord.cs" />
+    <Compile Include="Entities\BatchDetailRecord.cs" />
+    <Compile Include="Entities\BatchMasterRecord.cs" />
+    <Compile Include="Entities\CityRecord.cs" />
+    <Compile Include="Entities\ContactTypeRecord.cs" />
+    <Compile Include="Entities\CountryRecord.cs" />
+    <Compile Include="Entities\CustomerMasterRecord.cs" />
+    <Compile Include="Entities\CustomerMediaRecord.cs" />
+    <Compile Include="Entities\DM_AccountAnalysisRecord.cs" />
+    <Compile Include="Entities\DM_AccountSummaryRecord.cs" />
+    <Compile Include="Entities\DM_BranchMasterRecord.cs" />
+    <Compile Include="Entities\DM_CustomerMasterRecord.cs" />
+    <Compile Include="Entities\DM_CustomerNewsAndAlertsRecord.cs" />
+    <Compile Include="Entities\DM_CustomerProductWiseRewardPointsRecord.cs" />
+    <Compile Include="Entities\DM_CustomerReminderRecosRecord.cs" />
+    <Compile Include="Entities\DM_CustomerRewardPointsRecord.cs" />
+    <Compile Include="Entities\DM_CustomerRewardPointsRedeemedRecord.cs" />
+    <Compile Include="Entities\DM_CustomerRewardSpendByCategoryRecord.cs" />
+    <Compile Include="Entities\DM_ExplanatoryNotesRecord.cs" />
+    <Compile Include="Entities\DM_GreenbacksMasterRecord.cs" />
+    <Compile Include="Entities\DM_HomeLoanArrearsRecord.cs" />
+    <Compile Include="Entities\DM_HomeLoanMasterRecord.cs" />
+    <Compile Include="Entities\DM_HomeLoanSummaryRecord.cs" />
+    <Compile Include="Entities\DM_HomeLoanTransactionRecord.cs" />
+    <Compile Include="Entities\DM_InvestmentMasterRecord.cs" />
+    <Compile Include="Entities\DM_InvestmentTransactionRecord.cs" />
+    <Compile Include="Entities\DM_MarketingMessagesRecord.cs" />
+    <Compile Include="Entities\DM_NewsAndAlertsRecord.cs" />
+    <Compile Include="Entities\DM_PersonalLoanArrearsRecord.cs" />
+    <Compile Include="Entities\DM_PersonalLoanMasterRecord.cs" />
+    <Compile Include="Entities\DM_PersonalLoanTransactionRecord.cs" />
+    <Compile Include="Entities\DM_ReminderRecosRecord.cs" />
+    <Compile Include="Entities\DM_SpecialMessagesRecord.cs" />
+    <Compile Include="Entities\DynamicWidgetFilterDetail.cs" />
+    <Compile Include="Entities\DynamicWidgetRecord.cs" />
+    <Compile Include="Entities\EntityFieldMapRecord.cs" />
+    <Compile Include="Entities\FnGetParentAndChildTenant_Result.cs" />
+    <Compile Include="Entities\FnGetStaticAndDynamicWidgets_Result.cs" />
+    <Compile Include="Entities\FnUserTenant_Result.cs" />
+    <Compile Include="Entities\MultiTenantUserAccessMapRecord.cs" />
+    <Compile Include="Entities\NB_BatchMaster_Source.cs" />
+    <Compile Include="Entities\NB_BranchMaster.cs" />
+    <Compile Include="Entities\NB_BranchMaster_Old.cs" />
+    <Compile Include="Entities\NB_CorporateSaverMaster.cs" />
+    <Compile Include="Entities\NB_CorporateSaverTax.cs" />
+    <Compile Include="Entities\NB_CorporateSaverTransactions.cs" />
+    <Compile Include="Entities\NB_CustomerMaster.cs" />
+    <Compile Include="Entities\NB_HomeLoanArrears.cs" />
+    <Compile Include="Entities\NB_HomeLoanMaster.cs" />
+    <Compile Include="Entities\NB_HomeLoanSummary.cs" />
+    <Compile Include="Entities\NB_HomeLoanTransaction.cs" />
+    <Compile Include="Entities\NB_InvestmentMaster.cs" />
+    <Compile Include="Entities\NB_InvestmentMaster_Old.cs" />
+    <Compile Include="Entities\NB_InvestmentTransaction.cs" />
+    <Compile Include="Entities\NB_InvestmentTransaction_Old.cs" />
+    <Compile Include="Entities\NB_Investment_Source.cs" />
+    <Compile Include="Entities\NB_MCAMaster.cs" />
+    <Compile Include="Entities\NB_MCATransaction.cs" />
+    <Compile Include="Entities\NB_SegmentMaster.cs" />
+    <Compile Include="Entities\NB_SegmentTypeMaster.cs" />
+    <Compile Include="Entities\NB_ServiceMessagesAndContacts.cs" />
+    <Compile Include="DAL\NISDataContext.Context.cs" />
+    <Compile Include="Entities\PageRecord.cs" />
+    <Compile Include="Entities\PageTypeRecord.cs" />
+    <Compile Include="Entities\PageWidgetMapRecord.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductPageTypeMapping.cs" />
+    <Compile Include="Entities\ReminderAndRecommendationRecord.cs" />
+    <Compile Include="Entities\RenderEngineRecord.cs" />
+    <Compile Include="Entities\RolePrivilegeRecord.cs" />
+    <Compile Include="Entities\RoleRecord.cs" />
+    <Compile Include="Entities\SavingTrendRecord.cs" />
+    <Compile Include="Entities\ScheduleLogArchiveRecord.cs" />
+    <Compile Include="Entities\ScheduleLogDetailArchiveRecord.cs" />
+    <Compile Include="Entities\ScheduleLogDetailRecord.cs" />
+    <Compile Include="Entities\ScheduleLogRecord.cs" />
+    <Compile Include="Entities\ScheduleRecord.cs" />
+    <Compile Include="Entities\ScheduleRunHistoryRecord.cs" />
+    <Compile Include="Entities\StatementMetadataArchiveRecord.cs" />
+    <Compile Include="Entities\StatementMetadataRecord.cs" />
+    <Compile Include="Entities\StatementPageMapRecord.cs" />
+    <Compile Include="Entities\StatementRecord.cs" />
+    <Compile Include="Entities\StateRecord.cs" />
+    <Compile Include="Entities\SystemActivityHistoryRecord.cs" />
+    <Compile Include="Entities\TenantConfigurationRecord.cs" />
+    <Compile Include="Entities\TenantContactRecord.cs" />
+    <Compile Include="Entities\TenantEntityRecord.cs" />
+    <Compile Include="Entities\TenantRecord.cs" />
+    <Compile Include="Entities\TenantSecurityCodeFormatRecord.cs" />
+    <Compile Include="Entities\TenantSubscriptionRecord.cs" />
+    <Compile Include="Entities\TenantUserRecord.cs" />
+    <Compile Include="Entities\Top4IncomeSourcesRecord.cs" />
+    <Compile Include="Entities\TransactionDetailRecord.cs" />
+    <Compile Include="Entities\TransactionDetail_Old.cs" />
+    <Compile Include="Entities\TTD_CustomerMaster_Old.cs" />
+    <Compile Include="Entities\TTD_DataUsage_Old.cs" />
+    <Compile Include="Entities\TTD_EmailsBySubscription_Old.cs" />
+    <Compile Include="Entities\TTD_MeetingUsage_Old.cs" />
+    <Compile Include="Entities\TTD_SubscriptionMaster_Old.cs" />
+    <Compile Include="Entities\TTD_SubscriptionSpend_Old.cs" />
+    <Compile Include="Entities\TTD_SubscriptionSummary_Old.cs" />
+    <Compile Include="Entities\TTD_SubscriptionUsage_Old.cs" />
+    <Compile Include="Entities\TTD_UserSubscriptions_Old.cs" />
+    <Compile Include="Entities\TTD_VendorSubscription_Old.cs" />
+    <Compile Include="Entities\UserCredentialHistoryRecord.cs" />
+    <Compile Include="Entities\UserLoginActivityHistoryRecord.cs" />
+    <Compile Include="Entities\UserLoginRecord.cs" />
+    <Compile Include="Entities\UserRecord.cs" />
+    <Compile Include="Entities\UserRoleMapRecord.cs" />
+    <Compile Include="Entities\View_DynamicWidgetRecord.cs" />
+    <Compile Include="Entities\View_ETLScheduleLog.cs" />
+    <Compile Include="Entities\View_MultiTenantUserAccessMapRecord.cs" />
+    <Compile Include="Entities\View_PageRecord.cs" />
+    <Compile Include="Entities\View_PageWidgetMapRecord.cs" />
+    <Compile Include="Entities\View_ScheduleLog.cs" />
+    <Compile Include="Entities\View_ScheduleRecord.cs" />
+    <Compile Include="Entities\View_SourceDataRecord.cs" />
+    <Compile Include="Entities\View_StatementDefinitionRecord.cs" />
+    <Compile Include="Entities\View_StatementMetadataRecord.cs" />
+    <Compile Include="Entities\View_TenantSubscriptionRecord.cs" />
+    <Compile Include="Entities\View_UserRecord.cs" />
+    <Compile Include="Entities\WidgetPageTypeMap.cs" />
+    <Compile Include="Entities\WidgetRecord.cs" />
+    <Compile Include="Entities\EtlBatches.cs" />
+    <Compile Include="Entities\EtlSchedules.cs" />
+    <Compile Include="IRepository\IArchivalProcessRepository.cs" />
+    <Compile Include="IRepository\IETLScheduleRepository.cs" />
+    <Compile Include="IRepository\IPageTypeRepository.cs" />
+    <Compile Include="IRepository\IContactTypeRepository.cs" />
+    <Compile Include="IRepository\IDynamicWidgetRepository.cs" />
+    <Compile Include="IRepository\IMultiTenantUserRoleAccessRepository.cs" />
+    <Compile Include="IRepository\ISQLSystemActivityHistoryRepository.cs" />
+    <Compile Include="IRepository\ISQLTenantContactRepository.cs" />
+    <Compile Include="IRepository\IAnalyticsDataRepository.cs" />
+    <Compile Include="IRepository\ICityRepository.cs" />
+    <Compile Include="IRepository\ICountryRepository.cs" />
+    <Compile Include="IRepository\IStatementSearchRepository.cs" />
+    <Compile Include="IRepository\IStateRepository.cs" />
+    <Compile Include="IRepository\ITenantConfigurationRepository.cs" />
+    <Compile Include="IRepository\IAssetSettingRepository.cs" />
+    <Compile Include="IRepository\IAssetLibraryRepository.cs" />
+    <Compile Include="IRepository\IRenderEngineRepository.cs" />
+    <Compile Include="IRepository\IScheduleLogRepository.cs" />
+    <Compile Include="IRepository\IStatementRepository.cs" />
+    <Compile Include="IRepository\IPageRepository.cs" />
+    <Compile Include="IRepository\IScheduleRepository.cs" />
+    <Compile Include="IRepository\ITenantTransactionDataRepository.cs" />
+    <Compile Include="IRepository\ITenantUserRepository.cs" />
+    <Compile Include="IRepository\IWidgetRepository.cs" />
+    <Compile Include="IRepository\IRoleRepository.cs" />
+    <Compile Include="IRepository\IUserRepository.cs" />
+    <Compile Include="IRepository\NedBank\ICustomerRepository.cs" />
+    <Compile Include="IRepository\NedBank\ICorporateSaverRepository.cs" />
+    <Compile Include="IRepository\NedBank\IMCARepository.cs" />
+    <Compile Include="IRepository\NedBank\IInvestmentRepository.cs" />
+    <Compile Include="IRepository\NedBank\IProductRepository.cs" />
+    <Compile Include="Mappings\ScheduleLogDetailRecord.cs" />
+    <Compile Include="Mappings\View_PageRecord.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLRepository\NedBank\SQLProductRepository.cs" />
+    <Compile Include="SQLRepository\NedBank\SQLCustomerRepository.cs" />
+    <Compile Include="SQLRepository\NedBank\SQLInvestmentRepository.cs" />
+    <Compile Include="SQLRepository\NedBank\SQLCorporateSaverRepository.cs" />
+    <Compile Include="SQLRepository\NedBank\SQLMCARepository.cs" />
+    <Compile Include="SQLRepository\SQLAnalyticsDataRepository.cs" />
+    <Compile Include="SQLRepository\SQLArchivalProcessRepository.cs" />
+    <Compile Include="SQLRepository\SQLAzureCityRepository.cs" />
+    <Compile Include="SQLRepository\SQLAzureStateRepository.cs" />
+    <Compile Include="SQLRepository\SQLAzureTenantUserRepository.cs" />
+    <Compile Include="SQLRepository\SQLETLScheduleRepository.cs" />
+    <Compile Include="SQLRepository\SQLPageTypeRepository.cs" />
+    <Compile Include="SQLRepository\SQLContactTypeRepository.cs" />
+    <Compile Include="SQLRepository\SQLDynamicWidgetRepository.cs" />
+    <Compile Include="SQLRepository\SQLCountryRepository.cs" />
+    <Compile Include="SQLRepository\SQLMultiTenantUserRoleAccessRepository.cs" />
+    <Compile Include="SQLRepository\SQLSystemActivityHistoryRepository.cs" />
+    <Compile Include="SQLRepository\SQLTenantContactRepository.cs" />
+    <Compile Include="SQLRepository\SQLStatementSearchRepository.cs" />
+    <Compile Include="SQLRepository\SQLTenantConfigurationRepository.cs" />
+    <Compile Include="SQLRepository\SQLAssetSettingRepository.cs" />
+    <Compile Include="SQLRepository\SQLAssetLibraryRepository.cs" />
+    <Compile Include="SQLRepository\SQLAzureUserRepository.cs" />
+    <Compile Include="SQLRepository\SQLRenderEngineRepository.cs" />
+    <Compile Include="SQLRepository\SQLScheduleLogRepository.cs" />
+    <Compile Include="SQLRepository\SQLStatementRepository.cs" />
+    <Compile Include="SQLRepository\SQLPageRepository.cs" />
+    <Compile Include="SQLRepository\SQLAzureWidgetRepository.cs" />
+    <Compile Include="SQLRepository\SQLScheduleRepository.cs" />
+    <Compile Include="SQLRepository\SQLRoleRepository.cs" />
+    <Compile Include="SQLRepository\TenantTransactionDataRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoManager\CryptoManager.csproj">
+      <Project>{a8e2f6e4-374c-49f5-9be3-a25f855876f0}</Project>
+      <Name>CryptoManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exception\Exception.csproj">
+      <Project>{21ae8607-0557-4d67-96d1-7830e57eab4f}</Project>
+      <Name>Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{0de03c69-31fa-40cc-a2a3-de671ef011dd}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{8c2d7fe4-c754-46d8-a590-3981eff6bad8}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValidationEngine\ValidationEngine.csproj">
+      <Project>{d0a399af-38e5-4a15-8bb4-78ba4a578ffc}</Project>
+      <Name>ValidationEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

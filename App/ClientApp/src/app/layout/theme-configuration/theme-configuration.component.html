@@ -1,0 +1,279 @@
+<div class="main-container">
+
+  <div class="page-title">
+    <span class="xs-title"> Theme Configuration </span>
+  </div>
+
+  <form [formGroup]="tenantThemeConfigurationForm" name="tenantThemeConfigurationForm" autocomplete="on" novalidate>
+    <div class="card border-0 mb-2 card-shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Select Theme</label>
+            <div class="width100 form-group d-flex justify-content-start">
+              <div class="custom-control custom-radio mr-2">
+                <input class="custom-control-input" type="radio"
+                       name="themeoption" id="Default" value="themeConfigOption" checked (click)="isDefaultClicked()">
+                <label class="custom-control-label dir-rtl" for="Default">
+                  Application Theme
+                </label>
+              </div>
+              <div class="custom-control custom-radio mr-2">
+                <input class="custom-control-input" type="radio"
+                       name="themeoption" id="Custome" value="themeConfigOption" (click)="isCustomeClicked()">
+                <label class="custom-control-label dir-rtl" for="Custome">
+                  Widget Theme
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isDefault">
+          <div class="col-sm-12 form-group">
+            <div class="themes">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item" id="theme0" (click)="theme0()" [ngClass]="isTheme0Active? 'themeactive':''"></li>
+                <li class="list-inline-item" id="theme1" (click)="theme1()" [ngClass]="isTheme1Active? 'themeactive':''"></li>
+                <li class="list-inline-item" id="theme2" (click)="theme2()" [ngClass]="isTheme2Active? 'themeactive':''"></li>
+                <li class="list-inline-item" id="theme3" (click)="theme3()" [ngClass]="isTheme3Active? 'themeactive':''"></li>
+                <li class="list-inline-item" id="theme4" (click)="theme4()" [ngClass]="isTheme4Active? 'themeactive':''"></li>
+                <li class="list-inline-item" id="theme5" (click)="theme5()" [ngClass]="isTheme5Active? 'themeactive':''"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="d-flex justify-content-start p-1" style="background: #f5f5f5;width:fit-content;" *ngIf="isTheme0Active">
+              <div class="clr-box" style="background-color: #e28022"></div>
+              <div class="clr-box" style="background-color: #EA6227"></div>
+              <div class="clr-box" style="background-color: #686a68"></div>
+              <div class="clr-box" style="background-color: #e8e5e5"></div>
+            </div>
+            <div class="d-flex justify-content-start p-1" style="background:#f5f5f5;width:fit-content;" *ngIf="isTheme1Active">
+              <div class="clr-box" style="background-color: #121729;"></div>
+              <div class="clr-box" style="background-color: #0c111f;"></div>
+              <div class="clr-box" style="background-color: #61ca5b;"></div>
+              <div class="clr-box" style="background-color: #ffffff;"></div>
+            </div>
+            <div class="d-flex justify-content-start p-1" style="background:#f5f5f5;width:fit-content;" *ngIf="isTheme2Active">
+              <div class="clr-box" style="background-color: #393939;"></div>
+              <div class="clr-box" style="background-color: #232323;"></div>
+              <div class="clr-box" style="background-color: #ffffff;"></div>
+              <div class="clr-box" style="background-color: #676767;"></div>
+            </div>
+            <div class="d-flex justify-content-start p-1" style="background:#f5f5f5;width:fit-content;" *ngIf="isTheme3Active">
+              <div class="clr-box" style="background-color: #e28022"></div>
+              <div class="clr-box" style="background-color: #EA6227"></div>
+              <div class="clr-box" style="background-color: #686a68"></div>
+              <div class="clr-box" style="background-color: #e8e5e5"></div>
+            </div>
+            <div class="d-flex justify-content-start p-1" style="background:#f5f5f5;width:fit-content;" *ngIf="isTheme4Active">
+              <div class="clr-box" style="background-color: #212121;"></div>
+              <div class="clr-box" style="background-color: #393939;"></div>
+              <div class="clr-box" style="background-color: #464646;"></div>
+              <div class="clr-box" style="background-color: #e28022;"></div>
+            </div>
+            <div class="d-flex justify-content-start p-1" style="background:#f5f5f5;width:fit-content;" *ngIf="isTheme5Active">
+              <div class="clr-box" style="background-color: #383f48;"></div>
+              <div class="clr-box" style="background-color: #3e4e56;"></div>
+              <div class="clr-box" style="background-color: #5ebdd4;"></div>
+              <div class="clr-box" style="background-color: #5fa4c6;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isWidgetTheme">
+          <div class="col-sm-8">
+            <div class="card bg-light border-card form-group">
+              <div class="card-header bg-white">
+                <label class="mb-0">Select Color Theme </label>
+              </div>
+              <div class="card-body">
+                <div class="row mt-2">
+                  <div class="col-sm-6">
+                    <div class="custom-control custom-radio mr-2 mb-2">
+                      <input class="custom-control-input" type="radio" checked
+                             name="themeChartOption" id="charttheme1" value="charttheme1" (click)="widgetColorThemeClicked('ChartTheme1')">
+                      <label class="custom-control-label dir-rtl" for="charttheme1">
+                        <div class="d-flex justify-content-start">
+                          <div class="clr-box" style="background-color:#342ead"></div>
+                          <div class="clr-box" style="background-color:#EA6227"></div>
+                          <div class="clr-box" style="background-color:#f2a51a"></div>
+                          <div class="clr-box" style="background-color:#b9ebcc"></div>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input class="custom-control-input" type="radio"
+                             name="themeChartOption" id="charttheme2" value="charttheme2" (click)="widgetColorThemeClicked('ChartTheme2')">
+                      <label class="custom-control-label dir-rtl" for="chartTheme2">
+                        <div class="d-flex justify-content-start">
+                          <div class="clr-box" style="background-color:#45046a"></div>
+                          <div class="clr-box" style="background-color: #5c2a9d"></div>
+                          <div class="clr-box" style="background-color: #b5076b"></div>
+                          <div class="clr-box" style="background-color: #f1ebbb"></div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!--<label>&nbsp;</label>-->
+                    <div class="custom-control custom-radio mr-2 mb-2">
+                      <input class="custom-control-input" type="radio"
+                             name="themeChartOption" id="charttheme3" value="charttheme3" (click)="widgetColorThemeClicked('ChartTheme3')">
+                      <label class="custom-control-label dir-rtl" for="chartTheme3">
+                        <div class="d-flex justify-content-start">
+                          <div class="clr-box" style="background-color: #805D93;"></div>
+                          <div class="clr-box" style="background-color: #F49FBC;"></div>
+                          <div class="clr-box" style="background-color: #9EBD6E;"></div>
+                          <div class="clr-box" style="background-color: #169873;"></div>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input class="custom-control-input" type="radio"
+                             name="themeChartOption" id="charttheme4" value="charttheme4" (click)="widgetColorThemeClicked('ChartTheme4')">
+                      <label class="custom-control-label dir-rtl" for="chartTheme4">
+                        <div class="d-flex justify-content-start">
+                          <div class="clr-box" style="background-color: #303960"></div>
+                          <div class="clr-box" style="background-color: #ea9a96"></div>
+                          <div class="clr-box" style="background-color: #f8b24f"></div>
+                          <div class="clr-box" style="background-color: #e5e5e5"></div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="isWidgetTheme">
+          <div class="col-sm-8">
+            <div class="card bg-light border-card form-group">
+              <div class="card-header bg-white">
+                <label class="mb-0">Title Font</label>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                    <label> Color</label>
+                    <input type="color" class="form-control" formControlName="TitleFontColor" id="inputTitleFontColor" />
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Size</label>
+                    <input type="number" min="1" class="form-control" formControlName="TitleFontSize" id="inputTitleFontSize" />
+                    <div class="validation-msg" style="color:red">
+                      <ul *ngIf="TitleFontSize.touched && TitleFontSize.errors" style="list-style-type:none">
+                        <li class="text-danger" *ngIf="TitleFontSize.errors?.pattern">Inavid font size</li>
+                        <li class="text-danger" *ngIf="TitleFontSize.errors?.required">Font size required</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Weight</label>
+                    <select class="form-control" formControlName="TitleFontWeight" (change)='titleFontWeightChange($event)'>
+                      <option *ngFor="let weight of fontWeightArr" [value]="weight.Value">{{weight.Value}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-sm-6 form-group">
+                    <label> Type</label>
+                    <select class="form-control" formControlName="TitleFontType" (change)='titleFontTypeChange($event)'>
+                      <option *ngFor="let type of fontTypeArr" [value]="type.Value">{{type.Value}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="isWidgetTheme">
+          <div class="col-sm-8">
+            <div class="card bg-light border-card form-group">
+              <div class="card-header bg-white">
+                <label class="mb-0">Header/Label Font</label>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                    <label> Color</label>
+                    <input type="color" class="form-control" formControlName="HeaderLabelFontColor" id="inputHeaderLabelFontColor" />
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Size</label>
+                    <input type="number"  min="1" class="form-control" formControlName="HeaderLabelFontSize" id="inputHeaderLabelFontSize" />
+                    <div class="validation-msg" style="color:red">
+                      <ul *ngIf="HeaderLabelFontSize.touched && HeaderLabelFontSize.errors" style="list-style-type:none">
+                        <li class="text-danger" *ngIf="HeaderLabelFontSize.errors?.pattern">Invalid font size</li>
+                        <li class="text-danger" *ngIf="HeaderLabelFontSize.errors?.required">Font size required</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Weight</label>
+                    <select class="form-control" formControlName="HeaderLabelFontWeight" (change)='headerLabelFontWeightChange($event)'>
+                      <option *ngFor="let weight of fontWeightArr" [value]="weight.Value">{{weight.Value}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-sm-6 form-group">
+                    <label> Type</label>
+                    <select class="form-control" formControlName="HeaderLabelFontType" (change)='headerLabelFontTypeChange($event)'>
+                      <option *ngFor="let type of fontTypeArr" [value]="type.Value">{{type.Value}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isWidgetTheme">
+          <div class="col-sm-8">
+            <div class="card bg-light border-card form-group">
+              <div class="card-header bg-white">
+                <label class="mb-0">Data Font</label>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                    <label> Color</label>
+                    <input type="color" class="form-control" formControlName="DataLabelFontColor" id="inputDataLabelFontColor" />
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Size</label>
+                    <input type="number"  min="1" class="form-control" formControlName="DataLabelFontSize" id="inputDataLabelFontSize" />
+                    <div class="validation-msg" style="color:red">
+                      <ul *ngIf="DataLabelFontSize.touched && DataLabelFontSize.errors" style="list-style-type:none">
+                        <li class="text-danger" *ngIf="DataLabelFontSize.errors?.pattern">Invalid font size</li>
+                        <li class="text-danger" *ngIf="DataLabelFontSize.errors?.required">Font size required</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <label> Weight</label>
+                    <select class="form-control" formControlName="DataLabelFontWeight" (change)='dataLabelFontWeightChange($event)'>
+                      <option *ngFor="let weight of fontWeightArr" [value]="weight.Value">{{weight.Value}}</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3 col-sm-6 form-group">
+                    <label> Type</label>
+                    <select class="form-control" formControlName="DataLabelFontType" (change)='dataLabelFontTypeChange($event)'>
+                      <option *ngFor="let type of fontTypeArr" [value]="type.Value">{{type.Value}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="card border-0 mt-4 mb-3 bg-transparent">
+    <div class="card-body p-0">
+      <button class="btn-footer-fill mr-2" id="btnSave"  [disabled]="DisableSaveButton()" (click)="onSubmit()">Save</button>
+      <!-- <button class="btn-footer-outline" id="btnCancel">Cancel</button> -->
+    </div>
+  </div>
+</div>

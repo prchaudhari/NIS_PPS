@@ -1,0 +1,99 @@
+<div class="login-container">
+  <div class="login-left d-flex justify-content-center align-items-center">
+    <img src="././assets/images/new_nis_logo_white.png" class="login-logo" />
+  </div>
+  <div class="login-right box-shadow">
+    <div class="login-main">
+      <div class="row d-lg-none d-md-block text-center">
+        <div class="col-sm-12">
+          <img src="././assets/images/new_nis_logo_white.png" class="login-logo" />
+        </div>
+      </div>
+      <!--login form-->
+
+      <form [formGroup]="loginForm" name="loginForm" autocomplete="on" (submit)="OnSubmit()" novalidate>
+        <div id="login-frm" *ngIf="isLoginFlag">
+          <div class="row mb-4">
+            <div class="col-sm-12 text-center">
+              <h4 style="font-weight:normal"> Welcome </h4>
+              <p  class="m-0" style="font-weight:normal"> Please login to dashboard admin </p>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-12 mt-4">
+              <div class="login-control">
+                <span class="fa fa-user"></span>
+                <input type="text" class="txtLogin" placeholder="User name" autocomplete="off" formControlName="userName" maxlength="50">
+                <div class="validation-msg" style="color:red">
+                  <ul *ngIf="loginFormErrorObject.showUserNameError" style="list-style-type:none">
+                      <li class="text-danger" *ngIf="userName.errors?.pattern">Invalid username</li>
+                      <li class="text-danger" *ngIf="userName.errors?.required">Username is required</li>
+  
+                  </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-12">
+              <div class="login-control">
+                <span class="fa fa-lock"></span>
+                <input type="password" class="txtLogin" placeholder="Password" autocomplete="off" formControlName="password">
+                <div class="validation-msg" style="color:red">
+                  <ul *ngIf="loginFormErrorObject.showPasswordError" style="list-style-type:none">
+                      <li class="text-danger" *ngIf="password.errors?.required">Password is required</li>
+  
+                  </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12 mt-4">
+              <button type="submit" class="btn btn-default btn-block">Login</button>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-sm-12 text-center">
+              <a class="text-info" (click)="isForgotPassswordForm()"> Forgot Password ?</a>
+            </div>
+          </div>
+        </div>  
+      </form>
+      
+
+      <!--forgot password-->
+      <div id="forgot-frm" *ngIf="isForgotPassword">
+        <div class="row mb-4">
+          <div class="col-sm-12 text-center">
+            <h4 style="font-weight:normal"> Forgot your password? </h4>
+            <p class="m-0">
+              Enter your email below and we'll email you
+              Link to reset password.
+            </p>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12 mt-4">
+            <div class="login-control">
+              <span class="fa fa-envelope"></span>
+              <input type="email" class="txtLogin" placeholder="Email Id" [(ngModel)]="userEmail">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12 mt-4">
+            <button type="button" class="btn btn-default btn-block" (click)="onForgotPasswordSubmit()">Submit</button>
+            <label id="emailHelp" class="form-text text-danger text-left"> {{status}}</label>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12 text-center">
+            <a class="text-info" (click)="isLoginForm()"> Cancel </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> 
