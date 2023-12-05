@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 import { Template } from '../../layout/template/template';
 import { TemplateWidget } from '../../layout/template/templateWidget';
 import {
-  CustomerInformationComponent, AccountInformationComponent, ImageComponent, VideoComponent, SummaryAtGlanceComponent, TransactionDetailsComponent,
+  CustomerInformationComponent,CustomerContactComponent, AccountInformationComponent, ImageComponent, VideoComponent, SummaryAtGlanceComponent, TransactionDetailsComponent,
   SavingAvailableBalanceComponent, CurrentAvailableBalanceComponent, SavingTransactionDetailsComponent,
   SpendindTrendsComponent, TopIncomeSourcesComponent, SavingTrendsComponent, AnalyticsWidgetComponent, ReminderAndRecommComponent,
   DynamicBarChartWidgetComponent, DynamicLineChartWidgetComponent, DynamicPieChartWidgetComponent, DynamicHhtmlComponent, StaticHtmlComponent, SegmentBasedContentComponent, CustomerDetailsComponent, CorporateSaverAgentAddressComponent, BankDetailsComponent, WealthBankDetailsComponent,
@@ -953,6 +953,22 @@ export class AddDashboardDesignerComponent implements OnInit {
               IsDynamicWidget: false
             })
           }
+          else if (widget.WidgetName == "CustomerContact") {
+            return this.widgetsGridsterItemArray.push({
+              cols: 7,
+              rows: 3,
+              y: 0,
+              x: 0,
+              component: CustomerContactComponent,
+              value: widget.WidgetName,
+              WidgetId: widget.Identifier,
+              widgetItemCount: this.widgetItemCount,
+              WidgetSetting: '',
+              WidgetType: widget.WidgetType,
+              IsDynamicWidget: false
+            })
+          }
+ 
           else if (widget.WidgetName == "AccountInformation") {
             return this.widgetsGridsterItemArray.push({
               cols: 3,
@@ -2229,6 +2245,11 @@ export class AddDashboardDesignerComponent implements OnInit {
       if (widgetName == 'CustomerInformation') {
         gridObj.component = CustomerInformationComponent;
       }
+     else if (widgetName == 'customerContact') {
+      gridObj.component = CustomerContactComponent;
+    }
+   
+
       else if (widgetName == 'AccountInformation') {
         gridObj.component = AccountInformationComponent;
       }

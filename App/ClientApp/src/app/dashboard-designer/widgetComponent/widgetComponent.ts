@@ -46,8 +46,93 @@ export class CustomerInformationComponent {
   widgetsGridsterItemArray: any[] = [];
 
 }
+ 
 
-// Component Created for Account Information Widget--
+// Component Created for client contact Widget--
+@Component({
+  selector: 'CustomerContact',
+  template: `<div class="widget">
+    <div class="widget-header">
+      <span class="widget-header-title"> Client Contact Details </span>
+    </div>
+    <div class="widget-area">
+      <div class="row">
+        <div>
+      
+        <section class="info-section">
+        <div class="subsection1">
+
+  <span class="name">Miss HW HLONGWANE</span><br>
+  <span class="client">Client Contact Details</span><br>
+  <span class="mobile">Mobile: 082-1234567</span><br>
+  <p class="blue">Email: y.vanheerden@google.com</p>
+  </div>
+
+            
+                    <div class="vl"></div>
+              
+
+                <div class="subsection2">
+                <span class="address">Address</span><br>
+                <span>1John Vorster Drive</span><br>
+                <span>Randburg</span><br>
+                <span>Gauteng</span>
+            </div>
+
+
+            
+                    <div class="vl"></div>
+                
+
+ 
+                <div class="subsection3">
+                <table>
+                  <tr>
+                  <td class="ref">Intermediary Reference:</td>
+                  <td class="sec3">124529534</td>
+                 </tr>
+                  <tr>
+                  <td class="type">Measure Type:</td>
+                  <td> Commission</td>
+                  </tr>
+                  <tr>
+                  <td class="month">Month:</td>
+                  <td>September 2023</td>
+                  </tr>
+                  <tr>
+                  <td class="date1" colspan="2"><b>Date From:</b>
+                  2023-09-01 to 2023-01-01</td>
+                </tr>
+                  
+                <!-- <span class="ref">Intermediary Reference:124529534</span><br>
+                <span class="type">Measure Type:</span><span>Commission</span><br>
+                <span class="month">Month:</span><span> September 2023</span><br>
+                <span class="date1">Date From:</span><span>2023-9-10 to 2023-01-01</span> -->
+                  </table>
+            </div>          
+</section>
+
+<!-- <hr class="new"> -->
+
+
+
+                 </div>
+                 
+<hr class="new">
+      
+      </div>
+    </div>
+  </div>`
+})
+export class CustomerContactComponent {
+  @Input()
+  widgetsGridsterItemArray: any[] = [];
+
+}
+ 
+
+
+ // Component Created for Account Information Widget--
 @Component({
   selector: 'accountInformation',
   template: `<div class="widget">
@@ -68,6 +153,8 @@ export class CustomerInformationComponent {
     </div>
   </div>`
 })
+
+
 export class AccountInformationComponent {
   @Input()
   widgetsGridsterItemArray: any[] = [];

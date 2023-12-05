@@ -76,8 +76,12 @@ export class AddComponent implements OnInit {
 
       for (var i = 0; i < this.widgetList.length; i++) {
         if (this.widgetList[i].WidgetName == "CustomerInformation") {
-          this.widgetList[i].ImageSource = "assets/images/CustomerInfoWidget.PNG";
+          this.widgetList[i].ImageSource = "assets/images/CustomerInfoWidget.png";
           this.widgetList[i].WidgetIcon = "fa fa-address-book-o";
+        }
+        else if (this.widgetList[i].WidgetName == "CustomerContact") {
+          this.widgetList[i].ImageSource = "assets/images/customercontact.png";
+          this.widgetList[i].WidgetIcon = "fa fa-address-book";
         }
         else if (this.widgetList[i].WidgetName == "AccountInformation") {
           this.widgetList[i].ImageSource = "assets/images/AccountInfoWidget.PNG"
