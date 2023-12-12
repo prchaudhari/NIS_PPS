@@ -34,6 +34,7 @@ import { SelectTenantComponent } from './select-tenant/select-tenant.component';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { EnvironmentSpecificResolver } from './core/services/env-specific/environment-specific-resolver.service';
 import { EnvironmentSpecificService } from './core/services/env-specific/environment-specific.service';
+import { SampleComponent } from './sample/sample.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { EnvironmentSpecificService } from './core/services/env-specific/environ
     WidgetPreviewComponent,
     MultipleMessageboxComponent,
     SafeHtmlPip, 
-    SafeHtmlPipee, ErrorLogsViewComponent, SelectTenantComponent
+    SafeHtmlPipee, ErrorLogsViewComponent, SelectTenantComponent, SampleComponent
   ],
   imports: [
     BrowserModule,
