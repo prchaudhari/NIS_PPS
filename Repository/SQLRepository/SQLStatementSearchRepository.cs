@@ -538,7 +538,7 @@ namespace nIS
                             var pagewidgets = new List<PageWidget>(page.PageWidgets);
                             StringBuilder pageContent = new StringBuilder(statementPageContent.HtmlContent);
                             for (int j = 0; j < pagewidgets.Count; j++)
-                            {
+                            {HtmlConstants.CUSTOMER_INFORMATION_WIDGET_NAME)
                                 var widget = pagewidgets[j];
                                 if (!widget.IsDynamicWidget)
                                 {

@@ -955,7 +955,7 @@ export class AddDashboardDesignerComponent implements OnInit {
           }
           else if (widget.WidgetName == "CustomerContact") {
             return this.widgetsGridsterItemArray.push({
-              cols: 7,
+              cols: 8,
               rows: 3,
               y: 0,
               x: 0,
@@ -2245,7 +2245,7 @@ export class AddDashboardDesignerComponent implements OnInit {
       if (widgetName == 'CustomerInformation') {
         gridObj.component = CustomerInformationComponent;
       }
-     else if (widgetName == 'customerContact') {
+     else if (widgetName == 'CustomerContact') {
       gridObj.component = CustomerContactComponent;
     }
    

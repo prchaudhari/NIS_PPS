@@ -2231,6 +2231,28 @@ namespace nIS
             }
         }
 
+        private void BindCustomerContactWidgetData(StringBuilder pageContent, CustomerMaster customer, Statement statement, Page page, PageWidget widget, IList<CustomerMedia> customerMedias, IList<BatchDetail> batchDetails)
+        {
+            pageContent.Replace("{{CustomerContact}}", (customer.FirstName.Trim() + " " + (customer.MiddleName == string.Empty ? string.Empty : " " + customer.MiddleName.Trim()) + " " + customer.LastName.Trim()));
+            pageContent.Replace("{{MobileNo}}", string.Empty);
+            pageContent.Replace("{{CustEmail}}", string.Empty);
+            pageContent.Replace("{{Address1}}", customer.AddressLine1);
+            pageContent.Replace("{{Address2}}", customer.AddressLine2);
+           
+            var custMedia = customerMedias.Where(item => item.PageId == page.Identifier && item.WidgetId == widget.Identifier)?.ToList()?.FirstOrDefault();
+            if (custMedia != null && custMedia.VideoURL != string.Empty)
+            {
+                pageContent.Replace("{{VideoSource_" + statement.Identifier + "_" + page.Identifier + "_" + widget.Identifier + "}}", custMedia.VideoURL);
+            }
+            else
+            {
+                var batchDetail = batchDetails.Where(item => item.StatementId == statement.Identifier && item.WidgetId == widget.Identifier && item.PageId == page.Identifier)?.ToList()?.FirstOrDefault();
+                if (batchDetail != null && batchDetail.VideoURL != string.Empty)
+                {
+                    pageContent.Replace("{{VideoSource_" + statement.Identifier + "_" + page.Identifier + "_" + widget.Identifier + "}}", batchDetail.VideoURL);
+                }
+            }
+        }
         private void BindAccountInformationWidgetData(StringBuilder pageContent, CustomerMaster customer, Page page, PageWidget widget)
         {
             StringBuilder AccDivData = new StringBuilder();

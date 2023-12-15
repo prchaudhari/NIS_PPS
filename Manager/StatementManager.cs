@@ -5588,6 +5588,14 @@ namespace nIS
             widgetHTML = widgetHTML.Replace("{{WidgetId}}", widgetId);
             return widgetHTML;
         }
+        private string CustomerContactWidgetFormatting(PageWidget pageWidget, int counter, Statement statement, Page page, string divHeight)
+        {
+            var widgetId = "PageWidgetId_" + pageWidget.Identifier + "_Counter" + counter.ToString();
+            var widgetHTML = HtmlConstants.CUSTOMER_CONTACT_WIDGET_HTML_FOR_STMT.Replace("{{VideoSource}}", "{{VideoSource_" + statement.Identifier + "_" + page.Identifier + "_" + pageWidget.Identifier + "}}");
+            widgetHTML = widgetHTML.Replace("{{WidgetDivHeight}}", divHeight);
+            widgetHTML = widgetHTML.Replace("{{WidgetId}}", widgetId);
+            return widgetHTML;
+        }
 
         private string AccountInformationWidgetFormatting(PageWidget pageWidget, int counter, Statement statement, Page page, string divHeight)
         {
@@ -6405,6 +6413,7 @@ namespace nIS
         private void BindDummyDataToCustomerInformationWidget(StringBuilder pageContent, Statement statement, Page page, PageWidget widget, string AppBaseDirectory)
         {
             var customerInfoJson = "{'FirstName':'Laura','MiddleName':'J','LastName':'Donald','AddressLine1':'4000 Executive Parkway', 'AddressLine2':'Saint Globin Rd','City':'Canary Wharf', 'State':'London', 'Country':'England','Zip':'E14 9RZ'}";
+        
             if (customerInfoJson != string.Empty && validationEngine.IsValidJson(customerInfoJson))
             {
                 var customerInfo = JsonConvert.DeserializeObject<CustomerInformation>(customerInfoJson);
@@ -6414,7 +6423,18 @@ namespace nIS
                 pageContent.Replace("{{Address2}}", customerInfo.AddressLine3 + ", " + customerInfo.AddressLine4 + ", ");
             }
         }
-
+        private void BindDummyDataToCustomerContactWidget(StringBuilder pageContent, Statement statement, Page page, PageWidget widget, string AppBaseDirectory)
+        {
+            var customerContactJson = "{'FirstName':'Laura','MiddleName':'J','LastName':'Donald','AddressLine1':'4000 Executive Parkway', 'AddressLine2':'Saint Globin Rd','City':'Canary Wharf', 'State':'London', 'Country':'England','Zip':'E14 9RZ'}";
+            if (customerContactJson != string.Empty && validationEngine.IsValidJson(customerContactJson))
+            {
+                var customerContact = JsonConvert.DeserializeObject<CustomerContact>(customerContactJson);
+                pageContent.Replace("{{VideoSource_" + statement.Identifier + "_" + page.Identifier + "_" + widget.Identifier + "}}", AppBaseDirectory + "\\Resources\\sampledata\\SampleVideo.mp4");
+                pageContent.Replace("{{CustomerName}}", customerContact.FirstName + " " + customerContact.SurName);
+                pageContent.Replace("{{Address1}}", customerContact.AddressLine1 + ", " + customerContact.AddressLine2 + ", ");
+                pageContent.Replace("{{Address2}}", customerContact.AddressLine3 + ", " + customerContact.AddressLine4 + ", ");
+            }
+        }
         private void BindDummyDataToAccountInformationWidget(StringBuilder pageContent, Page page, PageWidget widget)
         {
             var accountInfoJson = "{'StatementDate':'1-APR-2020','StatementPeriod':'Annual Statement', 'CustomerID':'ID2-8989-5656','RmName':'James Wiilims', 'RmContactNumber':'+4487867833'}";

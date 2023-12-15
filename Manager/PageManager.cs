@@ -484,6 +484,28 @@ namespace nIS
                                                     htmlString.Append(customerHtmlWidget);
                                                 }
                                             }
+
+                                            if (mergedlst[i].WidgetName == HtmlConstants.CUSTOMER_CONTACT_WIDGET_NAME)
+                                            {
+                                                string customerIncontactJson = "{'FirstName':'Laura','MiddleName':'J','LastName':'Donald','AddressLine1':'231 Exe Parkway','AddressLine2':'Saint Globin Rd','City':'Canary Wharf','State':'London','Country':'England','Zip':'E14 9RZ'}";
+                                                if (customerInfoJson != string.Empty && validationEngine.IsValidJson(customerInfoJson))
+                                                {
+                                                    CustomerInformation customerInfo = JsonConvert.DeserializeObject<CustomerInformation>(customerInfoJson);
+                                                    var customerHtmlWidget = HtmlConstants.CUSTOMER_INFORMATION_WIDGET_HTML.Replace("{{VideoSource}}", "assets/images/SampleVideo.mp4");
+                                                    customerHtmlWidget = customerHtmlWidget.Replace("{{WidgetDivHeight}}", divHeight);
+
+                                                    string customerName = customerInfo.FirstName + " " + customerInfo.SurName;
+                                                    customerHtmlWidget = customerHtmlWidget.Replace("{{CustomerName}}", customerName);
+
+                                                    string address1 = customerInfo.AddressLine1 + ", " + customerInfo.AddressLine2 + ", ";
+                                                    customerHtmlWidget = customerHtmlWidget.Replace("{{Address1}}", address1);
+
+                                                    string address2 = customerInfo.AddressLine1 + ", " + customerInfo.AddressLine2 + ", ";
+                                                    customerHtmlWidget = customerHtmlWidget.Replace("{{Address2}}", address2);
+
+                                                    htmlString.Append(customerHtmlWidget);
+                                                }
+                                            }
                                             else if (mergedlst[i].WidgetName == HtmlConstants.ACCOUNT_INFORMATION_WIDGET_NAME)
                                             {
                                                 string accountInfoJson = "{'StatementDate':'1-APR-2020','StatementPeriod':'Annual Statement','CustomerID':'ID2-8989-5656','RmName':'James Wiilims','RmContactNumber':'+4487867833'}";
@@ -3405,7 +3427,7 @@ namespace nIS
             return html;
         }
 
-        private string ApplyStyleCssForDynamicGraphAndChartWidgets(string html, CustomeTheme themeDetails)
+        private string ḥApplyStyleCssForDynamicGraphAndChartWidgets(string html, CustomeTheme themeDetails)
         {
             StringBuilder style = new StringBuilder();
             style.Append(HtmlConstants.STYLE);
